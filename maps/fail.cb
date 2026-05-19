@@ -1,0 +1,11 @@
+F 220,100,0
+NO ./path_n.xpm
+WE ./path_w.xpm
+
+C 225,30,0
+EA ./path_e.xpm
+SO ./path_s.xpm
+
+111111
+1N0011
+111111
