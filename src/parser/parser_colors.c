@@ -6,12 +6,13 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:21:31 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/21 16:24:59 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/21 16:47:46 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+/* Checks if we have only digits in RGB numbers */
 int	check_rgb_number(char **str)
 {
 	int	i;
@@ -34,6 +35,7 @@ int	check_rgb_number(char **str)
 	return (0);
 }
 
+/* Splits RGB and checks if numbers are below 256 */
 int	check_rgb_format(char *str)
 {
 	char	**rgb;
@@ -53,6 +55,7 @@ int	check_rgb_format(char *str)
 	return (0);
 }
 
+/* Gets RGB from map->config and returns error if invalid */
 int	check_colors(t_map *map)
 {
 	int	i;

@@ -6,12 +6,13 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:25 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/21 16:15:48 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/21 16:45:47 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+/* Checks number of arguments */
 int	check_number(int n)
 {
 	if (n != 2)
@@ -22,6 +23,7 @@ int	check_number(int n)
 	return (0);
 }
 
+/* Checks if we can open the file */
 int	check_fd(char *file_name, char c)
 {
 	int	fd;
@@ -41,6 +43,7 @@ int	check_fd(char *file_name, char c)
 	return (0);
 }
 
+/* Checks if map has the .cub extension */
 int	check_map_name(char *name)
 {
 	int	i;

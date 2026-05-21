@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/21 16:21:11 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/21 18:05:35 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
+int check_blank_lines (t_map *map);
 int	check_chars(t_map *map);
 int	check_walls(t_map *map);
 
@@ -31,10 +32,9 @@ int	parsing(int ac, char **args, t_game *game)
 		return (1);
 	if (check_colors(&game->map))
 		return (1);
-	// map_height(args[1], game->map);
-	// read_map(args[1], game->map);
-	//check_elements
-	//check_chars
+	read_map(args[1], &game->map);
+	//check_format
+	//check_chars (NSEW apenas 1 e 0s 1s)
 	//check_walls
 	return (0);
 }

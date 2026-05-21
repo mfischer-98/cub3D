@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_text.c                                       :+:      :+:    :+:   */
+/*   parser_textures.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/21 16:17:48 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/21 17:49:04 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-// Checks for duplicated identifiers, to have less lines I created the array
+/* Checks for duplicated identifiers, to have less lines I created the array */
 int	check_duplicates(t_map *map)
 {
 	int	counter[6];
@@ -39,7 +39,7 @@ int	check_duplicates(t_map *map)
 	return (0);
 }
 
-// Checks if characters are the correct identifiers
+/* Checks if characters are the correct identifiers */
 int not_identifier(char *line)
 {
 	int	i;
@@ -59,11 +59,10 @@ int not_identifier(char *line)
 		return (0);
 	if (line[i] == 'C' && line[i + 1] == ' ')
 		return (0);
-	printf("Error\nInvalid identifiers\n");
 	return (1);
 }
 
-// Skips spaces and checks if line is empty, identifiers and stores it in *map_config
+/* Skips spaces and checks if line is empty, identifiers and stores it in *map_config */
 int	get_line(t_map *map, char *line, int *count)
 {
 	int		i;
@@ -77,6 +76,7 @@ int	get_line(t_map *map, char *line, int *count)
 	if (not_identifier(line))
 	{
 		free(line);
+		printf("Error\nInvalid identifiers\n");
 		return (1);
 	}
 	trimmed = ft_strtrim(line, "\n");
@@ -88,7 +88,7 @@ int	get_line(t_map *map, char *line, int *count)
 	return (0);
 }
 
-// Checks and stores values for each texture
+/* Checks and stores values for each texture */
 int	read_config(char *map_file, t_map *map)
 {
 	int		fd;
@@ -118,7 +118,7 @@ int	read_config(char *map_file, t_map *map)
 	return (0);
 }
 
-// Checks if the texture path is correct
+/* Checks if the texture path is correct */
 int check_textures(t_map *map)
 {
 	int	i;

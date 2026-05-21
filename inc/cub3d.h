@@ -52,7 +52,7 @@ int		parsing(int ac, char **args, t_game *game);
 int		check_number(int n);
 int		check_fd(char *file_name, char c);
 int		check_map_name(char *name);
-int		is_identifier(char *line);
+int		not_identifier(char *line);
 int		check_textures(t_map *map);
 int		read_config(char *map_file, t_map *map);
 int		get_line(t_map *map, char *line, int *count);
@@ -61,6 +61,10 @@ void 	id_count(char id, int *counter);
 int		check_colors(t_map *map);
 int		check_rgb_format(char *str);
 int		check_rgb_number(char **str);
+void	read_map(char *map_file, t_map *map);
+int		map_height(int start, char *map_file);
+int		map_start(char *map_file);
+int		is_empty_line(char *line);
 
 
 
