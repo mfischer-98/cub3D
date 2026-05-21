@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/19 16:22:49 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/21 10:26:49 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char **argv)
 	(void)argc;
 	(void)argv;
 	game = init_game();
-	if (parsing(argc, argv, game))
+	if (parsing(argc, argv, &game))
 	{
 	// 	free_data(game);
 		return (1);

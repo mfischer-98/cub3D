@@ -6,7 +6,7 @@
 #    By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/07 11:08:27 by mefische          #+#    #+#              #
-#    Updated: 2026/05/19 15:32:58 by mefische         ###   ########.fr        #
+#    Updated: 2026/05/21 16:21:45 by mefische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = cub3D
 
 MLX_URL		= git@github.com:42paris/minilibx-linux
 
-SRC = src/main.c src/init.c src/events.c \
-		src/parsing/check_args.c
+SRC = src/main.c src/init.c src/events.c src/free_data.c \
+		src/parsing/parsing.c src/parsing/parsing_utils.c src/parsing/check_args.c  src/parsing/check_text.c src/parsing/check_rgbs.c 
 
 MLX_PATH	= inc/mlx
 MLX_ARC		= $(MLX_PATH)/libmlx_Linux.a

@@ -6,32 +6,24 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:17:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/19 17:21:56 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/21 16:06:13 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
-// Checks if characters are the correct identifiers
-int is_identifier_line(char *line)
+void id_count(char id, int *counter)
 {
-	int	i;
-
-	i = 0;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
-	if (line[i] == 'N' && line[i + 1] == 'O')
-		return (1);
-	if (line[i] == 'S' && line[i + 1] == 'O')
-		return (1);
-	if (line[i] == 'W' && line[i + 1] == 'E')
-		return (1);
-	if (line[i] == 'E' && line[i + 1] == 'A')
-		return (1);
-	if (line[i] == 'F')
-		return (1);
-	if (line[i] == 'C')
-		return (1);
-	printf("Error\nInvalid identifier characters\n");
-	return (0);
+	if (id == 'N')
+		counter[0]++;
+	else if (id == 'S')
+		counter[1]++;
+	else if (id == 'W')
+		counter[2]++;
+	else if (id == 'E')
+		counter[3]++;
+	else if (id == 'F')
+		counter[4]++;
+	else if (id == 'C')
+		counter[5]++;
 }
