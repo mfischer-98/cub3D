@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:17:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/21 18:02:37 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/26 14:44:03 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,32 @@ int	is_empty_line(char *line)
 	if (line[i] == '\0')
 		return (1);
 	return (0);
+}
+
+void	line_trim(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '\r') && (str[i + 1] == '\n'))
+			str[i] = '\0';
+		else if ((str[i] == '\n') && (str[i + 1] == '\0'))
+			str[i] = '\0';
+		i++;
+	}
+}
+
+int	line_len(char *str)
+{
+	int	len;
+
+	len = 0;
+	if (str)
+	{
+		while (str[len])
+			len++;
+	}
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/21 18:05:35 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/26 14:55:01 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	parsing(int ac, char **args, t_game *game)
 	if (check_colors(&game->map))
 		return (1);
 	read_map(args[1], &game->map);
-	//check_format
+	//check_format, precisa?? min max?
 	//check_chars (NSEW apenas 1 e 0s 1s)
 	//check_walls
 	return (0);

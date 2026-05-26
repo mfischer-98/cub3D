@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/19 15:27:44 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/26 12:13:58 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_game	init_game(void)
 	game.win = NULL;
 	game.map.design = NULL;
 	game.map.width = 0;
+	game.map.start = 0;
 	game.map.height = 0;
 	game.map.orient = 0;
 	game.player.pos_x = 0;

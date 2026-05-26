@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 15:46:48 by mefische          #+#    #+#             */
-/*   Updated: 2025/07/02 13:18:15 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:44:28 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	stash[fd] = read_line(fd, stash[fd]);
 	if (!stash[fd])
-		return (NULL);
+		return (stash[fd] = NULL, NULL);
 	line = ft_get_line(stash[fd]);
 	if (!line)
 	{

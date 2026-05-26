@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_rgbs.c                                       :+:      :+:    :+:   */
+/*   parser_colors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:21:31 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/21 16:47:46 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/26 14:09:50 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* Checks if we have only digits in RGB numbers */
 int	check_rgb_number(char **str)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (str[i])
@@ -24,6 +24,8 @@ int	check_rgb_number(char **str)
 		j = 0;
 		while (str[i][j])
 		{
+			while (str[i][j] && !ft_isprint(str[i][j]))
+			//	j++;
 			if (!ft_isdigit(str[i][j]))
 				return (1);
 			j++;
@@ -39,19 +41,22 @@ int	check_rgb_number(char **str)
 int	check_rgb_format(char *str)
 {
 	char	**rgb;
+	char	*trimmed;
 
 	rgb = ft_split(str, ',');
 	if (!rgb)
 		return (1);
+	trimmed = ft_strtrim(rgb[0], " \t");
 	if (check_rgb_number(rgb))
-		return (free_array(rgb), 1);
-	if ((ft_atoi(rgb[0]) > 255))
-		return (free_array(rgb), 1);
+		return (free(trimmed), free_array(rgb), 1);
+	if ((ft_atoi((trimmed)) > 255))
+		return (free(trimmed), free_array(rgb), 1);
 	if ((ft_atoi(rgb[1]) > 255))
-		return (free_array(rgb), 1);
+		return (free(trimmed), free_array(rgb), 1);
 	if ((ft_atoi(rgb[2]) > 255))
-		return (free_array(rgb), 1);
+		return (free(trimmed), free_array(rgb), 1);
 	free_array(rgb);
+	free(trimmed);
 	return (0);
 }
 

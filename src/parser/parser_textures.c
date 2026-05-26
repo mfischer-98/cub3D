@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/21 17:49:04 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/26 15:49:48 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int	get_line(t_map *map, char *line, int *count)
 	}
 	trimmed = ft_strtrim(line, "\n");
 	free(line);
+	line = NULL;
 	if (!trimmed)
 		return (1);
 	map->config[*count] = trimmed;
@@ -113,9 +114,10 @@ int	read_config(char *map_file, t_map *map)
 		if (get_line(map, line, &count))
 				return (close(fd), 1);
 	}
+	while ((line = get_next_line(fd)))
+		free(line);
 	map->config[count] = NULL;
-	close(fd);
-	return (0);
+	return (close(fd), 0);
 }
 
 /* Checks if the texture path is correct */
