@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_map.c                                       :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/26 15:53:45 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/27 11:06:56 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-//BUG: garbage values in line, start is always 1
+/* Returns the number of the line where the map starts */
 int	map_start(char *map_file)
 {
 	int		fd;
@@ -29,9 +29,8 @@ int	map_start(char *map_file)
 	start = 0;
 	while ((line = get_next_line(fd)))
 	{
-		printf("%s", line);
 		start++;
-		while (line[i] == ' ')
+		while (line[i] == ' ' || line[i] == '\t')
 			i++;
 		if (line[i] == '1')
 		{
@@ -43,7 +42,7 @@ int	map_start(char *map_file)
 	return (close(fd), start);
 }
 
-// Getting map height
+/* Returns the number the height of map so we can allocate memory in map design */
 int	map_height(int start, char *map_file)
 {
 	int		fd;
@@ -68,7 +67,7 @@ int	map_height(int start, char *map_file)
 	return (height);
 }
 
-//Get map width and put map in matrix
+/* Puts line inside map->design, trims the \n and gets biggest width */
 void	get_map_design(t_map *map, char *line, int fd)
 {
 	int	i;
@@ -79,29 +78,31 @@ void	get_map_design(t_map *map, char *line, int fd)
 	while (i < map->height)
 	{
 		line = get_next_line(fd);
-		map->design[i] = line;
+		map->design[i] = ft_strdup(line);
 		line_trim(map->design[i]);
 		width = line_len(map->design[i]);
 		if (width > map->width)
 			map->width = width;
 		free(line);
+		printf("DEBUG %s\n", map->design[i]);
 		i++;
 	}
 	map->design[i] = NULL;
-	printf("width = %d\n", map->width);
+	printf("DEBUG\n");
+	printf("height: %d\n", map->height);
+	printf("width: %d\n", map->width);
+	printf("start: %d\n", map->start);
 }
 
-// Opening file and getting map height, start and values
+/* Opens map file and gets all the information so we have it in our map struct */
 void	read_map(char *map_file, t_map *map)
 {
 	int		fd;
 	int		i;
 	char	*line;
 
-	map->start = map_start(map_file);
-	map->height = map_height(map->start, map_file);
-	printf("height = %d\n", map->height);
-	printf("start = %d\n", map->start);
+	map->start = map_start(map_file) - 1;
+	map->height = map_height(map->start, map_file) + 1;
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return ;

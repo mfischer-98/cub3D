@@ -66,9 +66,8 @@ void	read_map(char *map_file, t_map *map);
 void	get_map_design(t_map *map, char *line, int fd);
 int		map_height(int start, char *map_file);
 int		map_start(char *map_file);
-int		is_empty_line(char *line);
 void	line_trim(char *str);
-int	line_len(char *str);
+int		line_len(char *str);
 
 // INITIALIZATION
 t_game	init_game(void);

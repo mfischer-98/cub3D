@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:17:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/26 14:44:03 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:40:38 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,6 @@ void id_count(char id, int *counter)
 		counter[4]++;
 	else if (id == 'C')
 		counter[5]++;
-}
-
-int	is_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (!line)
-		return (1);
-	while (line[i] == ' ' || line[i] == '\t' || line[i] == '\n' || line[i] == '\r')
-		i++;
-	if (line[i] == '\0')
-		return (1);
-	return (0);
 }
 
 void	line_trim(char *str)

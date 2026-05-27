@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/26 15:49:48 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/27 10:54:58 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,10 +137,7 @@ int check_textures(t_map *map)
 			|| map->config[i][j] == 'W' || map->config[i][j] == 'E')
 		{
 			if (check_fd(&map->config[i][j + 3], 't'))
-			{
-				printf("%s\n", &map->config[i][j + 3]);
 				return (1);
-			}
 		}
 		i++;
 	} 
