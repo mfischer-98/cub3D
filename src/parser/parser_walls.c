@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 11:07:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 11:00:36 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/28 11:18:13 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,46 @@
 /* Gets player position and adds it to player struct */
 void	find_player(t_map *map, t_player *player)
 {
-	int	x;
-	int	y;
+	int	i;
+	int	j;
 
-	y = 0;
-	while (y < map->height - 1)
+	i = 0;
+	while (i < map->height - 1)
 	{
-		x = 0;
-		while (map->design[y][x] && map->design[y][x] != '\n')
+		j = 0;
+		while (map->design[i][j] && map->design[i][j] != '\n')
 		{
-			if (map->design[y][x] == map->orient)
+			if (map->design[i][j] == map->orient)
 			{
-				player->pos_x = x;
-				player->pos_y = y;
+				player->row = i;
+				player->col = j;
 				return ;
 			}
-			x++;
+			j++;
 		}
-		y++;
+		i++;
 	}
 }
 
 /* Turns 0 into Fs and then checks 
 	- If I leave map with flood fill = open_map (return 0)
 	- If I get to a space = open_map (return 0) */
-int	flood_fill(t_map *map, char **map_copy, int x, int y)
+int	flood_fill(t_map *map, char **map_copy, int i, int j)
 {
-	if (x < 0 || y < 0 || x >= map->width || y >= map->height)
+	if (i < 0 || j < 0 || i >= map->height || j >= map->width)
 		return (0);
-	if (map_copy[y][x] == ' ')
+	if (map_copy[i][j] == ' ')
 		return (0);
-	if (map_copy[y][x] == 'F' || map_copy[y][x] == '1')
+	if (map_copy[i][j] == 'F' || map_copy[i][j] == '1')
 		return (1);
-	map_copy[y][x] = 'F';
-	if (!flood_fill(map, map_copy, x - 1, y))
+	map_copy[i][j] = 'F';
+	if (!flood_fill(map, map_copy, i - 1, j))
 		return (0);
-	if (!flood_fill(map, map_copy, x + 1, y))
+	if (!flood_fill(map, map_copy, i + 1, j))
 		return (0);
-	if (!flood_fill(map, map_copy, x, y - 1))
+	if (!flood_fill(map, map_copy, i, j - 1))
 		return (0);
-	if (!flood_fill(map, map_copy, x, y + 1))
+	if (!flood_fill(map, map_copy, i, j + 1))
 		return (0);
 	return (1);
 }
@@ -67,8 +67,8 @@ int	check_walls(t_map *map, t_player *player)
 
 	find_player(map, player);
 	map_copy = copy_array(map);
-	map_copy[player->pos_y][player->pos_x] = '0';
-	closed = flood_fill(map, map_copy, player->pos_x, player->pos_y);
+	map_copy[player->row][player->col] = '0';
+	closed = flood_fill(map, map_copy, player->row, player->col);
 	free_array(map_copy);
 	if (!closed)
 	{
@@ -78,42 +78,42 @@ int	check_walls(t_map *map, t_player *player)
 	return (0);
 }
 
-static void	copy_row(t_map *map, char *row, int y)
+static void	copy_row(t_map *map, char *row, int i)
 {
-	int	x;
+	int	j;
 	int	len;
 
-	len = ft_strlen(map->design[y]);
-	x = 0;
-	while (x < map->width)
+	len = ft_strlen(map->design[i]);
+	j = 0;
+	while (j < map->width)
 	{
-		if (x < len)
-			row[x] = map->design[y][x];
+		if (j < len)
+			row[j] = map->design[i][j];
 		else
-			row[x] = ' ';
-		x++;
+			row[j] = ' ';
+		j++;
 	}
-	row[x] = '\0';
+	row[j] = '\0';
 }
 
 char	**copy_array(t_map *map)
 {
 	char	**copy;
-	int		y;
+	int		i;
 
 	copy = malloc(sizeof(char *) * (map->height + 1));
 	if (!copy)
 		return (NULL);
-	y = 0;
-	while (y < map->height)
+	i = 0;
+	while (i < map->height)
 	{
-		copy[y] = malloc(sizeof(char) * (map->width + 1));
-		if (!copy[y])
+		copy[i] = malloc(sizeof(char) * (map->width + 1));
+		if (!copy[i])
 			return (NULL);
-		copy_row(map, copy[y], y);
-		printf("%s\n", copy[y]);
-		y++;
+		copy_row(map, copy[i], i);
+		printf("%s\n", copy[i]);
+		i++;
 	}
-	copy[y] = NULL;
+	copy[i] = NULL;
 	return (copy);
 }

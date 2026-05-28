@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 10:06:08 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/28 11:19:14 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,20 @@
 /* Checks if there are blank lines inside the map */
 int check_blank_lines (t_map *map)
 {
-	int	x;
-	int	y;
+	int	i;
+	int	j;
 
-	x = 0;
-	while (x < map->height - 1)
+	i = 0;
+	while (i < map->height - 1)
 	{
-		y = 0;
-		y = skip_spaces(map->design[x], y);
-		if (map->design[x][y] == '\n' || map->design[x][y] == '\0')
+		j = 0;
+		j = skip_spaces(map->design[i], j);
+		if (map->design[i][j] == '\n' || map->design[i][j] == '\0')
 		{
 			printf("Error\nBlank lines in map\n");
 			return (1);
 		}
-		x++;
+		i++;
 	}
 	return (0);
 }
@@ -36,26 +36,26 @@ int check_blank_lines (t_map *map)
 /* Checks if map characters are valid: 1, 0, N, S, W, E */
 int	check_chars(t_map *map)
 {
-	int	x;
-	int	y;
+	int	i;
+	int	j;
 
-	x = 0;
-	while (map->design[x])
+	i = 0;
+	while (map->design[i])
 	{
-		y = 0;
-		while (map->design[x][y])
+		j = 0;
+		while (map->design[i][j])
 		{
-			y = skip_spaces(map->design[x], y);
-			if (map->design[x][y] != '1' && map->design[x][y] != '0'
-				&& map->design[x][y] != 'N' && map->design[x][y] != 'S'
-				&& map->design[x][y] != 'E' && map->design[x][y] != 'W')
+			j = skip_spaces(map->design[i], j);
+			if (map->design[i][j] != '1' && map->design[i][j] != '0'
+				&& map->design[i][j] != 'N' && map->design[i][j] != 'S'
+				&& map->design[i][j] != 'E' && map->design[i][j] != 'W')
 			{
 				printf("Error\nInvalid map characters\n");
 				return (1);
 			}
-			y++;
+			j++;
 		}
-		x++;
+		i++;
 	}
 	return (0);
 }
@@ -63,29 +63,29 @@ int	check_chars(t_map *map)
 /* Checks if we have one player spawning character */
 int	check_player_char(t_map *map)
 {
-	int	x;
-	int	y;
+	int	i;
+	int	j;
 	int	counter;
 
-	x = 0;
+	i = 0;
 	counter = 0;
-	while (map->design[x])
+	while (map->design[i])
 	{
-		y = 0;
-		while (map->design[x][y])
+		j = 0;
+		while (map->design[i][j])
 		{
-			y = skip_spaces(map->design[x], y);
-			if (map->design[x][y] == 'N' || map->design[x][y] == 'S'
-				|| map->design[x][y] == 'E' || map->design[x][y] == 'W')
+			j = skip_spaces(map->design[i], j);
+			if (map->design[i][j] == 'N' || map->design[i][j] == 'S'
+				|| map->design[i][j] == 'E' || map->design[i][j] == 'W')
 			{
-				map->orient = map->design[x][y];
+				map->orient = map->design[i][j];
 				counter++;
 				if (counter != 1)
 					return (printf("Error\nInvalid player characters\n"), 1);
 			}
-			y++;
+			j++;
 		}
-		x++;
+		i++;
 	}
 	return (0);
 }
@@ -115,6 +115,5 @@ int	parsing(int ac, char **args, t_game *game)
 		return (1);
 	if (check_walls(&game->map, &game->player))
 		return (1);
-	//check_format, precisa?? min max?
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 10:57:40 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/28 11:09:42 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	map_start(char *map_file)
 		if (line[i] == '1')
 		{
 			free(line);
-			close(fd);
-			return (start);
+			return (close(fd), start);
 		}
+		free(line);
 	}
 	return (close(fd), start);
 }

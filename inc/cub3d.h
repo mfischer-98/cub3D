@@ -33,8 +33,8 @@ typedef struct s_textures
 
 typedef struct s_player
 {
-	int			pos_x;
-	int			pos_y;
+	int			row;
+	int			col;
 }			t_player;
 
 typedef struct s_game
@@ -85,6 +85,7 @@ int		handle_input(int keysym, void *param);
 
 // FREE DATA
 void	free_array(char **array);
-
+void	free_data(t_game *game);
+void	free_map(t_map *map);
 
 #endif
