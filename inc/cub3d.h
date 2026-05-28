@@ -1,15 +1,20 @@
 #ifndef CUB3D_H
 #define CUB3D_H
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "libft/libft.h"
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include "libft/libft.h"
 # include "mlx/mlx.h"
 # include <X11/keysym.h>
 
-# define WIN_W 1280
-# define WIN_H 720
-# define TEXT_SIZE 64 //64x64? ou 32x32?
+# define TEXT_SIZE 32 //64x64? ou 32x32?
+
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define PI 3.14159265359
 
 typedef struct s_map
 {
@@ -33,14 +38,26 @@ typedef struct s_textures
 
 typedef struct s_player
 {
-	int			row;
-	int			col;
+	int			x;
+	int			y;
+	bool		key_up;
+	bool		key_down;
+	bool		key_left;
+	bool		key_right;
+
 }			t_player;
 
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	int			win_width;
+	int			win_height;
+	char		*data;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	void		*img;
 	t_map		map;
 	t_player	player;
 	t_textures	texture;
@@ -77,13 +94,26 @@ int		check_walls(t_map *map, t_player *player);
 
 
 // INITIALIZATION
-t_game	init_game(void);
+t_game	init_game_data(void);
+void	init_player(t_player *player);
+void	init_game(t_game *game);
 
-// WINDOW EVENTS
-int		close_window(void *param);
-int		handle_input(int keysym, void *param);
+// PUT PIXELS
+void	put_pixel(int x, int y, int color, t_game *game);
+void	draw_square(int x, int y, int size, int color, t_game *game);
+int		draw_loop(t_game *game);
+void	clear_image(t_game *game);
+void	draw_map(t_game *game);
+
+//PLAYER MOVEMENT
+int		move_player(t_player *player);
+
+// KEY EVENTS
+int		key_press(int keysym, t_game *game);
+int		key_release(int keysym, t_game *game);
 
 // FREE DATA
+int		close_window(void *param);
 void	free_array(char **array);
 void	free_data(t_game *game);
 void	free_map(t_map *map);

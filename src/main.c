@@ -6,11 +6,25 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 14:08:34 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/28 16:23:40 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+/* Starts mlx and creates a window */
+void	init_game(t_game *game)
+{
+	game->win_width = (game->map.width - 1) * TEXT_SIZE;
+	game->win_height = (game->map.height - 1) * TEXT_SIZE; //BUG: HEIGHT IS WIDTH?? 
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, game->win_height, game->win_width, "cub3D");
+	if (!game->win)
+		return (close_window(&game), (void)1);
+	game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
+	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
+	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+}
 
 int	main(int argc, char **argv)
 {
@@ -18,20 +32,20 @@ int	main(int argc, char **argv)
 
 	(void)argc;
 	(void)argv;
-	game = init_game();
+	game = init_game_data();
 	if (parsing(argc, argv, &game))
 	{
 		free_data(&game);
 		return (1);
 	}
-	game.mlx = mlx_init();
-	if (!game.mlx)
-		return (1);
-	game.win = mlx_new_window(game.mlx, WIN_W, WIN_H, "cub3D"); //later map.width and height
-	if (!game.win)
-		return (close_window(&game), 1);
-	mlx_hook(game.win, 17, 0, &close_window, &game); //X working
-	mlx_key_hook(game.win, &handle_input, &game);
+	printf("height = %d\n", game.map.height);
+	printf("width = %d\n", game.map.width);
+
+	init_game(&game);
+	mlx_hook(game.win, 17, 0, &close_window, &game); // X working
+	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
+	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
+	mlx_loop_hook(game.mlx, draw_loop, &game); // Draws player
 	mlx_loop(game.mlx);
 	return (0);
 }
