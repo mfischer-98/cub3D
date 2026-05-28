@@ -6,7 +6,7 @@
 #    By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/07 11:08:27 by mefische          #+#    #+#              #
-#    Updated: 2026/05/27 10:53:49 by mefische         ###   ########.fr        #
+#    Updated: 2026/05/28 10:03:12 by mefische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ MLX_URL		= git@github.com:42paris/minilibx-linux
 
 SRC = src/main.c src/init.c src/events.c src/free_data.c \
 		src/parser/parser.c src/parser/parser_utils.c src/parser/parser_args.c  src/parser/parser_textures.c src/parser/parser_colors.c \
-		src/parser/get_map.c
+		src/parser/get_map.c src/parser/parser_walls.c 
 
 MLX_PATH	= inc/mlx
 MLX_ARC		= $(MLX_PATH)/libmlx_Linux.a

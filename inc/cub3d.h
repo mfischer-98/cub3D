@@ -54,6 +54,7 @@ int		check_number(int n);
 int		check_fd(char *file_name, char c);
 int		check_map_name(char *name);
 int		not_identifier(char *line);
+int		skip_spaces(char *str, int i);
 int		check_textures(t_map *map);
 int		read_config(char *map_file, t_map *map);
 int		get_line(t_map *map, char *line, int *count);
@@ -68,6 +69,12 @@ int		map_height(int start, char *map_file);
 int		map_start(char *map_file);
 void	line_trim(char *str);
 int		line_len(char *str);
+char	*convert_tabs(char *str);
+void	find_player(t_map *map, t_player *player);
+char	**copy_array(t_map *map);
+int		flood_fill(t_map *map, char **map_copy, int x, int y);
+int		check_walls(t_map *map, t_player *player);
+
 
 // INITIALIZATION
 t_game	init_game(void);

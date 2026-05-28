@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/27 10:54:58 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/28 09:10:33 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int	get_line(t_map *map, char *line, int *count)
 	char	*trimmed;
 
 	i = 0;
-	while (line[i] == ' ' || line[i] == '\t')
-		i++;
+	i = skip_spaces(line, i);
 	if (line[i] == '\0' || line[i] == '\n')
 		return (free(line), 0);
 	if (not_identifier(line))
@@ -107,8 +106,7 @@ int	read_config(char *map_file, t_map *map)
 	while (count < 6 && (line = get_next_line(fd)))
 	{
 		i = 0;
-		while (line[i] == ' ' || line[i] == '\t')
-			i++;
+		i = skip_spaces(line, i);
 		if (count == 6)
 			break ;
 		if (get_line(map, line, &count))
@@ -130,13 +128,13 @@ int check_textures(t_map *map)
 	while (map->config[i])
 	{
 		j = 0;
-		while (map->config[i][j] == ' ' || map->config[i][j] == '\t')
-			j++;
-
+		j = skip_spaces(map->config[i], j);
 		if (map->config[i][j] == 'N' || map->config[i][j] == 'S'
 			|| map->config[i][j] == 'W' || map->config[i][j] == 'E')
 		{
-			if (check_fd(&map->config[i][j + 3], 't'))
+			j += 2;
+			j = skip_spaces(map->config[i], j);
+			if (check_fd(&map->config[i][j], 't'))
 				return (1);
 		}
 		i++;

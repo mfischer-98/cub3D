@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:21:31 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/26 14:09:50 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/28 09:11:32 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ int	check_rgb_number(char **str)
 		j = 0;
 		while (str[i][j])
 		{
-			while (str[i][j] && !ft_isprint(str[i][j]))
-			//	j++;
+			j = skip_spaces(str[i], j);
 			if (!ft_isdigit(str[i][j]))
 				return (1);
 			j++;

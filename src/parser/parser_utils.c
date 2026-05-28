@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:17:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/27 10:40:38 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/28 10:57:58 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,6 @@ void id_count(char id, int *counter)
 		counter[5]++;
 }
 
-void	line_trim(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == '\r') && (str[i + 1] == '\n'))
-			str[i] = '\0';
-		else if ((str[i] == '\n') && (str[i + 1] == '\0'))
-			str[i] = '\0';
-		i++;
-	}
-}
-
 int	line_len(char *str)
 {
 	int	len;
@@ -55,4 +40,56 @@ int	line_len(char *str)
 			len++;
 	}
 	return (len);
+}
+
+int	skip_spaces(char *str, int i)
+{
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
+	return (i);
+}
+
+static int	count_tabs(char *str)
+{
+	int	i;
+	int	tabs;
+
+	i = 0;
+	tabs = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t')
+			tabs++;
+		i++;
+	}
+	return (ft_strlen(str) + (tabs * 3));
+}
+
+/* Converts tabs into 4 spaces in string */
+char	*convert_tabs(char *str)
+{
+	int		i;
+	int		j;
+	char	*temp;
+
+	temp = malloc(sizeof(char) * (count_tabs(str) + 1));
+	if (!temp)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '\t')
+		{
+			temp[j++] = ' ';
+			temp[j++] = ' ';
+			temp[j++] = ' ';
+			temp[j++] = ' ';
+		}
+		else
+			temp[j++] = str[i];
+		i++;
+	}
+	temp[j] = '\0';
+	return (temp);
 }

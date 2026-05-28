@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/27 11:06:56 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/28 10:57:40 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ int	map_height(int start, char *map_file)
 /* Puts line inside map->design, trims the \n and gets biggest width */
 void	get_map_design(t_map *map, char *line, int fd)
 {
-	int	i;
-	int	width;
+	int		i;
+	int		width;
+	char	*temp;
 
 	width = 0;
 	i = 0;
@@ -79,19 +80,17 @@ void	get_map_design(t_map *map, char *line, int fd)
 	{
 		line = get_next_line(fd);
 		map->design[i] = ft_strdup(line);
+		temp = convert_tabs(map->design[i]);
+		free(map->design[i]);
+		map->design[i] = temp;
 		line_trim(map->design[i]);
 		width = line_len(map->design[i]);
 		if (width > map->width)
 			map->width = width;
 		free(line);
-		printf("DEBUG %s\n", map->design[i]);
 		i++;
 	}
 	map->design[i] = NULL;
-	printf("DEBUG\n");
-	printf("height: %d\n", map->height);
-	printf("width: %d\n", map->width);
-	printf("start: %d\n", map->start);
 }
 
 /* Opens map file and gets all the information so we have it in our map struct */
@@ -118,4 +117,19 @@ void	read_map(char *map_file, t_map *map)
 	}
 	get_map_design(map, line, fd);
 	close(fd);
+}
+
+void	line_trim(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((str[i] == '\r') && (str[i + 1] == '\n'))
+			str[i] = '\0';
+		else if ((str[i] == '\n') && (str[i + 1] == '\0'))
+			str[i] = '\0';
+		i++;
+	}
 }
