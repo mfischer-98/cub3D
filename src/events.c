@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:17:17 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 15:48:07 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 11:26:51 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int	key_release(int keysym, t_game *game)
 		game->player.key_left = false;
 	if (keysym == D)
 		game->player.key_right = false;
+	if (keysym == XK_Right)
+		game->player.right_rotate = false;
+	if (keysym == XK_Left)
+		game->player.left_rotate = false;
 	return (0);
 }
 
@@ -39,6 +43,10 @@ int	key_press(int keysym, t_game *game)
 		game->player.key_left = true;
 	if (keysym == D)
 		game->player.key_right = true;
+	if (keysym == XK_Right)
+		game->player.right_rotate = true;
+	if (keysym == XK_Left)
+		game->player.left_rotate = true;
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 16:16:06 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 11:08:04 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 
 void	init_player(t_player *player)
 {
+	player->angle = PI / 2;
 	player->key_up = false;
 	player->key_down = false;
 	player->key_left = false;
 	player->key_right = false;
+	player->left_rotate = false;
+	player->right_rotate = false;
 }
 
 t_game	init_game_data(void)

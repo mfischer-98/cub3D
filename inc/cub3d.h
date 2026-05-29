@@ -4,6 +4,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <math.h>
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 # include <X11/keysym.h>
@@ -40,10 +41,14 @@ typedef struct s_player
 {
 	double		x;
 	double		y;
+	double		angle;
+
 	bool		key_up;
 	bool		key_down;
 	bool		key_left;
 	bool		key_right;
+	bool		left_rotate;
+	bool		right_rotate;
 
 }			t_player;
 
@@ -53,11 +58,13 @@ typedef struct s_game
 	void		*win;
 	int			win_width;
 	int			win_height;
+
 	char		*data;
 	int			bpp;
 	int			size_line;
 	int			endian;
 	void		*img;
+
 	t_map		map;
 	t_player	player;
 	t_textures	texture;
@@ -106,6 +113,7 @@ void	clear_image(t_game *game);
 void	draw_map(t_game *game);
 
 //PLAYER MOVEMENT
+double	rotate_player(t_player *player, double angle_speed);
 int		move_player(t_player *player, t_map *map);
 
 // KEY EVENTS
