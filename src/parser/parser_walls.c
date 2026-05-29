@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 11:07:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 14:49:06 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:50:24 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	find_player(t_map *map, t_player *player)
 		{
 			if (map->design[i][j] == map->orient)
 			{
-				player->x = i;
-				player->y = j;
+				player->y = i;
+				player->x = j;
 				return ;
 			}
 			j++;
@@ -67,8 +67,8 @@ int	check_walls(t_map *map, t_player *player)
 
 	find_player(map, player);
 	map_copy = copy_array(map);
-	map_copy[player->x][player->y] = '0';
-	closed = flood_fill(map, map_copy, player->x, player->y);
+	map_copy[(int)player->y][(int)player->x] = '0';
+	closed = flood_fill(map, map_copy, player->y, player->x);
 	free_array(map_copy);
 	if (!closed)
 	{

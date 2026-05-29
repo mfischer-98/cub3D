@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 16:20:57 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:49:04 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,10 @@ void	clear_image(t_game *game)
 int	draw_loop(t_game *game)
 {
 	clear_image(game);
-	move_player(&game->player);
-	draw_square(game->player.x * TEXT_SIZE, game->player.y * TEXT_SIZE, TEXT_SIZE, 0x00FF00, game);
+	move_player(&game->player, &game->map);
 	draw_map(game);
+	draw_square(((int)game->player.x * TEXT_SIZE),
+		((int)game->player.y * TEXT_SIZE), TEXT_SIZE, 0x00FF00, game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (0);
 }
@@ -92,7 +93,7 @@ void	draw_map(t_game *game)
 		while (game->map.design[i][j])
 		{
 			if (game->map.design[i][j] == '1')
-				draw_square(i * TEXT_SIZE, j * TEXT_SIZE, TEXT_SIZE, color, game);
+				draw_square(j * TEXT_SIZE, i * TEXT_SIZE, TEXT_SIZE, color, game);
 			j++;
 		}
 		i++;

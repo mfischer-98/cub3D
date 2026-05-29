@@ -38,8 +38,8 @@ typedef struct s_textures
 
 typedef struct s_player
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 	bool		key_up;
 	bool		key_down;
 	bool		key_left;
@@ -106,7 +106,7 @@ void	clear_image(t_game *game);
 void	draw_map(t_game *game);
 
 //PLAYER MOVEMENT
-int		move_player(t_player *player);
+int		move_player(t_player *player, t_map *map);
 
 // KEY EVENTS
 int		key_press(int keysym, t_game *game);

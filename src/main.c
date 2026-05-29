@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 16:23:40 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 10:26:46 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /* Starts mlx and creates a window */
 void	init_game(t_game *game)
 {
-	game->win_width = (game->map.width - 1) * TEXT_SIZE;
+	game->win_width = (game->map.width) * TEXT_SIZE;
 	game->win_height = (game->map.height - 1) * TEXT_SIZE; //BUG: HEIGHT IS WIDTH?? 
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->win_height, game->win_width, "cub3D");
+	game->win = mlx_new_window(game->mlx, game->win_width,  game->win_height, "cub3D");
 	if (!game->win)
 		return (close_window(&game), (void)1);
 	game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
