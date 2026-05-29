@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 09:10:33 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:36:08 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_duplicates(t_map *map)
 }
 
 /* Checks if characters are the correct identifiers */
-int not_identifier(char *line)
+int	not_identifier(char *line)
 {
 	int	i;
 
@@ -62,7 +62,8 @@ int not_identifier(char *line)
 	return (1);
 }
 
-/* Skips spaces and checks if line is empty, identifiers and stores it in *map_config */
+/* Skips spaces and checks if line is empty, identifiers 
+	and stores it in *map_config */
 int	get_line(t_map *map, char *line, int *count)
 {
 	int		i;
@@ -103,23 +104,22 @@ int	read_config(char *map_file, t_map *map)
 	if (!map->config)
 		return (close(fd), 1);
 	count = 0;
-	while (count < 6 && (line = get_next_line(fd)))
+	i = 0;
+	line = get_next_line(fd);
+	while (count < 6 && line)
 	{
-		i = 0;
 		i = skip_spaces(line, i);
-		if (count == 6)
-			break ;
 		if (get_line(map, line, &count))
-				return (close(fd), 1);
+			return (close(fd), 1);
+		line = get_next_line(fd);
 	}
-	while ((line = get_next_line(fd)))
-		free(line);
+	run_file(line, fd);
 	map->config[count] = NULL;
-	return (close(fd), 0);
+	return (free(line), close(fd), 0);
 }
 
 /* Checks if the texture path is correct */
-int check_textures(t_map *map)
+int	check_textures(t_map *map)
 {
 	int	i;
 	int	j;
@@ -138,6 +138,6 @@ int check_textures(t_map *map)
 				return (1);
 		}
 		i++;
-	} 
+	}
 	return (0);
 }

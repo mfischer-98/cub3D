@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 11:07:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 10:50:24 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:08:38 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ int	flood_fill(t_map *map, char **map_copy, int i, int j)
 	return (1);
 }
 
-/* Gets player position and validates flood_fill, returns error if walls are open */
+/* Gets player position and validates flood_fill,
+	returns error if walls are open */
 int	check_walls(t_map *map, t_player *player)
 {
 	char	**map_copy;

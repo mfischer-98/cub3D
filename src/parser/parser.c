@@ -6,14 +6,14 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 11:35:46 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:28:00 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
 /* Checks if there are blank lines inside the map */
-int check_blank_lines (t_map *map)
+int	check_blank_lines(t_map *map)
 {
 	int	i;
 	int	j;
@@ -116,4 +116,13 @@ int	parsing(int ac, char **args, t_game *game)
 	if (check_walls(&game->map, &game->player))
 		return (1);
 	return (0);
+}
+
+void	run_file(char *line, int fd)
+{
+	while (line)
+	{
+		line = get_next_line(fd);
+		free(line);
+	}
 }

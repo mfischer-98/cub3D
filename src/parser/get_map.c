@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 11:35:14 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:23:10 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	map_start(char *map_file)
 	int		i;
 	int		start;
 	char	*line;
-
 
 	line = NULL;
 	fd = open(map_file, O_RDONLY);
@@ -42,7 +41,8 @@ int	map_start(char *map_file)
 	return (close(fd), start);
 }
 
-/* Returns the number the height of map so we can allocate memory in map design */
+/* Returns the number the height of map so we can
+	allocate memory in map design */
 int	map_height(int start, char *map_file)
 {
 	int		fd;
@@ -55,13 +55,15 @@ int	map_height(int start, char *map_file)
 	if (fd < 0)
 		return (0);
 	i = 0;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		if (i >= start)
 			height++;
 		free(line);
 		line = NULL;
 		i++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (height);
@@ -93,7 +95,8 @@ void	get_map_design(t_map *map, char *line, int fd)
 	map->design[i] = NULL;
 }
 
-/* Opens map file and gets all the information so we have it in our map struct */
+/* Opens map file and gets all the information
+	so we have it in our map struct */
 void	read_map(char *map_file, t_map *map)
 {
 	int		fd;

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:56:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 11:49:25 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:06:59 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,11 @@ int	not_wall(t_map *map, double x, double y)
 	return (1);
 }
 
-double	rotate_player(t_player *player, double angle_speed)
+double	rotate_player(t_player *player)
 {
+	double	angle_speed; // double is 8 bytes, can change to float 4bytes but less precise
+
+	angle_speed = 0.5;
 	if (player->left_rotate)
 		player->angle -= angle_speed;
 	if (player->right_rotate)
@@ -39,35 +42,59 @@ double	rotate_player(t_player *player, double angle_speed)
 	return (angle_speed);
 }
 
+void	move_vertical(t_player *player, t_map *map, double speed)
+{
+	double	cos_angle;
+	double	sin_angle;
+
+	cos_angle = cos(player->angle);
+	sin_angle = sin(player->angle);
+	if (player->key_up)
+	{
+		if (not_wall(map, player->x + cos_angle * speed, player->y))
+			player->x += cos_angle * speed;
+		if (not_wall(map, player->x, player->y + sin_angle * speed))
+			player->y += sin_angle * speed;
+	}
+	if (player->key_down)
+	{
+		if (not_wall(map, player->x - cos_angle * speed, player->y))
+			player->x -= cos_angle * speed;
+		if (not_wall(map, player->x, player->y - sin_angle * speed))
+			player->y -= sin_angle * speed;
+	}
+}
+
+void	move_horizontal(t_player *player, t_map *map, double speed)
+{
+	double	cos_angle;
+	double	sin_angle;
+
+	cos_angle = cos(player->angle);
+	sin_angle = sin(player->angle);
+	if (player->key_right)
+	{
+		if (not_wall(map, player->x - sin_angle * speed, player->y))
+			player->x -= sin_angle * speed;
+		if (not_wall(map, player->x, player->y + cos_angle * speed))
+			player->y += cos_angle * speed;
+	}
+	if (player->key_left)
+	{
+		if (not_wall(map, player->x + sin_angle * speed, player->y))
+			player->x += sin_angle * speed;
+		if (not_wall(map, player->x, player->y - cos_angle * speed))
+			player->y -= cos_angle * speed;
+	}
+}
+
 int	move_player(t_player *player, t_map *map)
 {
 	double	speed;
-	double	angle_speed; // double is 8 bytes, can change to float 4bytes but less precise
-	double	cos_angle = cos(player->angle);
-	double	sin_angle = sin(player->angle);
 
-	speed = 0.5;
-	angle_speed = 0.5;
-	angle_speed = rotate_player(player, angle_speed);
-	if (not_wall(map, player->x, player->y - 1) && player->key_up)
-	{
-		player->x -= cos_angle * speed;
-		player->y -= sin_angle * speed;
-	}
-	if (not_wall(map, player->x, player->y + 1) && player->key_down)
-	{
-		player->x += cos_angle * speed;
-		player->y += sin_angle * speed;
-	}
-	if (not_wall(map, player->x + 1, player->y) && player->key_left)
-	{
-		player->x -= sin_angle * speed;
-		player->y += cos_angle * speed;
-	}
-	if (not_wall(map, player->x - 1, player->y) && player->key_right)
-	{
-		player->x += sin_angle * speed;
-		player->y -= cos_angle * speed;
-	}
+	speed = 0.2;
+	rotate_player(player);
+	move_vertical(player, map, speed);
+	move_horizontal(player, map, speed);
 	return (0);
 }

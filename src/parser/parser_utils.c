@@ -6,14 +6,14 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:17:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 10:57:58 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:26:38 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
 /* Used to check if there are repeated identifiers or missing any */
-void id_count(char id, int *counter)
+void	id_count(char id, int *counter)
 {
 	if (id == 'N')
 		counter[0]++;

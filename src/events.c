@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:17:17 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 11:26:51 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:07:12 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,14 @@ int	key_press(int keysym, t_game *game)
 }
 
 /* Before closing the window it frees all data */
-int	close_window(void *param)
+int	close_window(t_game *game)
 {
-	t_game *game;
-
-	game = (t_game *)param;
-	//free_images(game);
+	//free_textures(game);
+	if (game->img)
+		mlx_destroy_image(game->mlx, game->img);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
-	free_data(game);
 	free(game->mlx);
+	free_data(game);
 	exit(1);
 }

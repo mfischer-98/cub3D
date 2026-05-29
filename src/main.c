@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 11:38:00 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:03:42 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->win_width,  game->win_height, "cub3D");
 	if (!game->win)
-		return (close_window(&game), (void)1);
+		return (close_window(game), (void)1);
 	game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
 	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
@@ -38,9 +38,7 @@ int	main(int argc, char **argv)
 		free_data(&game);
 		return (1);
 	}
-	printf("height = %d\n", game.map.height);
-	printf("width = %d\n", game.map.width);
-
+	get_player_angle(&game);
 	init_game(&game);
 	mlx_hook(game.win, 17, 0, &close_window, &game); // X working
 	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);

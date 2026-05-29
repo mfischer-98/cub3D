@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:39:46 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/28 15:04:47 by mefische         ###   ########.fr       */
+/*   Updated: 2026/05/29 15:05:23 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	free_array(char **array)
 	int	i;
 
 	i = 0;
-	while(array[i])
+	while (array[i])
 	{
 		free(array[i]);
 		i++;

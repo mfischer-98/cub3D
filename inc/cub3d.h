@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
+/*   Updated: 2026/05/29 15:28:16 by mefische         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -19,22 +31,22 @@
 
 typedef struct s_map
 {
-	char	**design;
-	char	**config;
-	int		width;
-	int		height;
-	char	orient;
-	int		start;
+	char		**design;
+	char		**config;
+	int			width;
+	int			height;
+	char		orient;
+	int			start;
 }			t_map;
 
 typedef struct s_textures
 {
-	void	*n_wall;
-	void	*s_wall;
-	void	*e_wall;
-	void	*w_wall;
-	int		floor;
-	int		ceiling;
+	void		*n_wall;
+	void		*s_wall;
+	void		*e_wall;
+	void		*w_wall;
+	int			floor;
+	int			ceiling;
 }			t_textures;
 
 typedef struct s_player
@@ -83,7 +95,7 @@ int		check_textures(t_map *map);
 int		read_config(char *map_file, t_map *map);
 int		get_line(t_map *map, char *line, int *count);
 int		check_duplicates(t_map *map);
-void 	id_count(char id, int *counter);
+void	id_count(char id, int *counter);
 int		check_colors(t_map *map);
 int		check_rgb_format(char *str);
 int		check_rgb_number(char **str);
@@ -98,12 +110,13 @@ void	find_player(t_map *map, t_player *player);
 char	**copy_array(t_map *map);
 int		flood_fill(t_map *map, char **map_copy, int x, int y);
 int		check_walls(t_map *map, t_player *player);
-
+void	run_file(char *line, int fd);
 
 // INITIALIZATION
 t_game	init_game_data(void);
 void	init_player(t_player *player);
 void	init_game(t_game *game);
+void	get_player_angle(t_game *game);
 
 // PUT PIXELS
 void	put_pixel(int x, int y, int color, t_game *game);
@@ -113,15 +126,17 @@ void	clear_image(t_game *game);
 void	draw_map(t_game *game);
 
 //PLAYER MOVEMENT
-double	rotate_player(t_player *player, double angle_speed);
+double	rotate_player(t_player *player);
 int		move_player(t_player *player, t_map *map);
+void	move_vertical(t_player *player, t_map *map, double speed);
+void	move_horizontal(t_player *player, t_map *map, double speed);
 
 // KEY EVENTS
 int		key_press(int keysym, t_game *game);
 int		key_release(int keysym, t_game *game);
 
 // FREE DATA
-int		close_window(void *param);
+int		close_window(t_game *game);
 void	free_array(char **array);
 void	free_data(t_game *game);
 void	free_map(t_map *map);
