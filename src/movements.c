@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:56:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:06:59 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:05:11 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ double	rotate_player(t_player *player)
 {
 	double	angle_speed; // double is 8 bytes, can change to float 4bytes but less precise
 
-	angle_speed = 0.5;
+	angle_speed = 0.02;
 	if (player->left_rotate)
 		player->angle -= angle_speed;
 	if (player->right_rotate)
@@ -92,7 +92,7 @@ int	move_player(t_player *player, t_map *map)
 {
 	double	speed;
 
-	speed = 0.2;
+	speed = 0.05;
 	rotate_player(player);
 	move_vertical(player, map, speed);
 	move_horizontal(player, map, speed);

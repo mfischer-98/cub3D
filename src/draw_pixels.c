@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:04:48 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:04:14 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,24 @@ void	clear_image(t_game *game)
 
 int	draw_loop(t_game *game)
 {
-	clear_image(game);
+	int	i;
+	double	step;
+	double	angle;
+
 	move_player(&game->player, &game->map);
-	draw_map(game);
-	draw_square(((int)game->player.x * TEXT_SIZE),
-		((int)game->player.y * TEXT_SIZE), TEXT_SIZE, 0x00FF00, game);
+	clear_image(game);
+	// draw_map(game);
+	// draw_square(((int)game->player.x * TEXT_SIZE),
+	// 	((int)game->player.y * TEXT_SIZE), TEXT_SIZE, 0x00FF00, game);
+	angle = game->player.angle - (PI / 6);
+	step = (PI / 3) / game->win_width;
+	i = 0;
+	while(i < game->win_width)
+	{
+		ray_line(angle, i, game);
+		angle += step;
+		i++;
+	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 	return (0);
 }

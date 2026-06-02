@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:28:16 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/02 09:59:27 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,33 @@ typedef struct s_player
 
 }			t_player;
 
+typedef struct s_ray
+{
+	double	ray_x;
+	double	ray_y;
+	double	cos_angle;
+	double	sin_angle;
+	double	delta_x;
+	double	delta_y;
+	double	distance;
+}			t_ray;
+
 typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
 	int			win_width;
 	int			win_height;
-
 	char		*data;
 	int			bpp;
 	int			size_line;
 	int			endian;
 	void		*img;
-
 	t_map		map;
 	t_player	player;
 	t_textures	texture;
+	t_ray		ray;
 }			t_game;
-
-//Probably a struct t_ray for raycasting
 
 // PARSING
 int		parsing(int ac, char **args, t_game *game);
@@ -117,6 +125,7 @@ t_game	init_game_data(void);
 void	init_player(t_player *player);
 void	init_game(t_game *game);
 void	get_player_angle(t_game *game);
+void	init_ray(t_ray *ray);
 
 // PUT PIXELS
 void	put_pixel(int x, int y, int color, t_game *game);
@@ -125,7 +134,7 @@ int		draw_loop(t_game *game);
 void	clear_image(t_game *game);
 void	draw_map(t_game *game);
 
-//PLAYER MOVEMENT
+// PLAYER MOVEMENT
 double	rotate_player(t_player *player);
 int		move_player(t_player *player, t_map *map);
 void	move_vertical(t_player *player, t_map *map, double speed);
@@ -134,6 +143,10 @@ void	move_horizontal(t_player *player, t_map *map, double speed);
 // KEY EVENTS
 int		key_press(int keysym, t_game *game);
 int		key_release(int keysym, t_game *game);
+
+// RAY
+int		touch(double px, double py, t_game *game);
+void	ray_line(double angle, int i, t_game *game);
 
 // FREE DATA
 int		close_window(t_game *game);

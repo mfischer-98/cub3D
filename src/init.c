@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:39:08 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/02 09:19:53 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,14 @@ void	init_player(t_player *player)
 	player->right_rotate = false;
 }
 
+void	init_ray(t_ray *ray)
+{
+	ray->ray_x = 0;
+	ray->ray_y = 0;
+	ray->cos_angle = 0;
+	ray->sin_angle = 0;
+}
+
 t_game	init_game_data(void)
 {
 	t_game	game;
@@ -56,6 +64,7 @@ t_game	init_game_data(void)
 	game.map.height = 0;
 	game.map.orient = 0;
 	init_player(&game.player);
+	init_ray(&game.ray);
 	game.texture.floor = 0;
 	game.texture.ceiling = 0;
 	return (game);
