@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 09:09:27 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/02 10:13:35 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:48:24 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	touch(double px, double py, t_game *game)
 
 	x = (int)(px / TEXT_SIZE);
 	y = (int)(py / TEXT_SIZE);
+	if (x < 0 || y < 0 || y >= game->map.height || x >= game->map.width)
+		return (1);
 	if (game->map.design[y][x] == '1')
 		return (true);
 	return (false);
@@ -54,10 +56,8 @@ void	ray_line(double angle, int i, t_game *game)
 	game->ray.ray_y = game->player.y * TEXT_SIZE + TEXT_SIZE / 2;
 	game->ray.cos_angle = cos(angle);
 	game->ray.sin_angle = sin(angle);
-
 	while (!touch(game->ray.ray_x, game->ray.ray_y, game))
 	{
-		// put_pixel((int)game->ray.ray_x, (int)game->ray.ray_y, 0xFF0000, game);
 		game->ray.ray_x += game->ray.cos_angle;
 		game->ray.ray_y += game->ray.sin_angle;
 	}

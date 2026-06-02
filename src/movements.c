@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:56:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/02 10:05:11 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/02 10:41:07 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ double	rotate_player(t_player *player)
 		player->angle -= angle_speed;
 	if (player->right_rotate)
 		player->angle += angle_speed;
-	if (player->angle > 2 * PI) // Need to normalize the angle so it is within a circle 2PI
+	while (player->angle > 2 * PI) // Need to normalize the angle so it is within a circle 2PI
 		player->angle = 0;
-	if (player->angle < 0) // Completing the circle
+	while (player->angle < 0) // Completing the circle
 		player->angle = 2 * PI;
 	return (angle_speed);
 }
