@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 10:41:58 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/02 10:47:32 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/05 11:00:44 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void draw_square(int x, int y, int size, int color, t_game *game)
 	}
 }
 
-/* In draw_loop 
+/* In Render_scene 
 	// draw_map(game);
 	// draw_square(((int)game->player.x * TEXT_SIZE),
 	// 	((int)game->player.y * TEXT_SIZE), TEXT_SIZE, 0x00FF00, game); */

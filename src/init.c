@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/02 09:19:53 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/05 09:41:50 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,22 @@ void	init_player(t_player *player)
 
 void	init_ray(t_ray *ray)
 {
-	ray->ray_x = 0;
-	ray->ray_y = 0;
-	ray->cos_angle = 0;
-	ray->sin_angle = 0;
+	ray->pos_x = 0;
+	ray->pos_y = 0;
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->map_x = 0;
+	ray->map_y = 0;
+	ray->delta_x = 0;
+	ray->delta_y = 0;
+	ray->side_x = 0;
+	ray->side_y = 0;
+	ray->hit = 0;
+	ray->side = 0;
+	ray->p_dist = 0;
+	ray->line_height = 0;
+	ray->draw_start = 0;
+	ray->draw_end = 0;
 }
 
 t_game	init_game_data(void)

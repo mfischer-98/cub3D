@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:03:42 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/05 11:39:41 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 17, 0, &close_window, &game); // X working
 	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
-	mlx_loop_hook(game.mlx, draw_loop, &game); // Draws player
+	mlx_loop_hook(game.mlx, &render_scene, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

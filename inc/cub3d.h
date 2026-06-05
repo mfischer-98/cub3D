@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/02 09:59:27 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/05 11:23:31 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,26 @@ typedef struct s_player
 
 typedef struct s_ray
 {
-	double	ray_x;
-	double	ray_y;
-	double	cos_angle;
-	double	sin_angle;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+
+	int		map_x;
+	int		map_y;
+
 	double	delta_x;
 	double	delta_y;
-	double	distance;
+	double	side_x;
+	double	side_y;
+
+	int		hit; //flags pra saber se bateu na parede e qual lado
+	int		side;
+
+	double	p_dist; // perpendicular distance
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
 }			t_ray;
 
 typedef struct s_game
@@ -130,9 +143,19 @@ void	init_ray(t_ray *ray);
 // PUT PIXELS
 void	put_pixel(int x, int y, int color, t_game *game);
 void	draw_square(int x, int y, int size, int color, t_game *game);
-int		draw_loop(t_game *game);
+int		render_scene(t_game *game);
 void	clear_image(t_game *game);
 void	draw_map(t_game *game);
+
+// DDA RAYCASTING
+void	DDA_grid_step(t_game *game, t_ray *ray);
+void	DDA_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y);
+void	ray_line(double angle, int i, t_game *game);
+void	perpend_dist(t_ray *ray);
+void	wall_height(t_game *game, t_ray *ray);
+void	ray_reset(t_game *game);
+void	setup_ray(t_game *game, double angle);
+void	draw_wall_column(int x, t_game *game, t_ray *ray);
 
 // PLAYER MOVEMENT
 double	rotate_player(t_player *player);

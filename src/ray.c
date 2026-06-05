@@ -6,70 +6,82 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 09:09:27 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/02 10:48:24 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/05 11:40:14 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-int	touch(double px, double py, t_game *game)
+/* Decides which direction the ray goes and calculates the distance
+	until the first horizontal or verticla line */
+void	DDA_grid_step(t_game *game, t_ray *ray)
 {
-	int	x;
-	int	y;
+	int	step_x;
+	int	step_y;
 
-	x = (int)(px / TEXT_SIZE);
-	y = (int)(py / TEXT_SIZE);
-	if (x < 0 || y < 0 || y >= game->map.height || x >= game->map.width)
-		return (1);
-	if (game->map.design[y][x] == '1')
-		return (true);
-	return (false);
+	if (ray->dir_x < 0)
+	{
+		step_x = -1;
+		ray->side_x = (ray->pos_x - ray->map_x) * ray->delta_x;
+	}
+	else
+	{
+		step_x = 1;
+		ray->side_x = (ray->map_x + 1.0 - ray->pos_x) * ray->delta_x;
+	}
+	if (ray->dir_y < 0)
+	{
+		step_y = -1;
+		ray->side_y = (ray->pos_y - ray->map_y) * ray->delta_y;
+	}
+	else
+	{
+		step_y = 1;
+		ray->side_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_y;
+	}
+	DDA_ray_loop(game, ray, step_x, step_y);
 }
 
-double	distance(double x, double y)
+void	DDA_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y)
 {
-	return (sqrt((x * x) + (y * y)));
-}
+	ray->hit = 0;
+	ray->side = 0;
 
-double	fix_distance(double x1, double y1, double x2, double y2, t_game *game)
-{
-	double	delta_x;
-	double	delta_y;
-	double	angle;
-	double	fix_dist;
-
-	delta_x = x2 - x1;
-	delta_y = y2 - y1;
-	angle = atan2(delta_y, delta_x) - game->player.angle;
-	fix_dist = distance(delta_x, delta_y) * cos(angle);
-	return (fix_dist); 
+	while (ray->hit == 0)
+	{
+		// Linha y (VERTICAL) está mais perto
+		if (ray->side_x < ray->side_y)
+		{
+			//avanço a distancia para prox linha vertical
+			ray->side_x += ray->delta_x;
+			//avanca grid no mapa
+			ray->map_x += step_x;
+			//marca que estamos no lado X, que é vertical
+			ray->side = 0;
+		}
+		// Linha x (HORIZONTAL) está mais perto
+		else
+		{
+			//avanço a distancia para prox linha horizontal
+			ray->side_y += ray->delta_y;
+			//avanca grid no mapa
+			ray->map_y += step_y;
+			//marca que estamos no lado Y, que é horizontal
+			ray->side = 1;
+		}
+		if (ray->map_y < 0 || ray->map_y >= game->map.height
+			|| ray->map_x < 0 || ray->map_x >= game->map.width)
+			break ;
+		if (game->map.design[ray->map_y][ray->map_x] == '1')
+			ray->hit = 1;
+	}
 }
 
 void	ray_line(double angle, int i, t_game *game)
 {
-	double	dist;
-	double	height;
-	int		start_y;
-	int		end;
-	
-	game->ray.ray_x = game->player.x * TEXT_SIZE + TEXT_SIZE / 2;
-	game->ray.ray_y = game->player.y * TEXT_SIZE + TEXT_SIZE / 2;
-	game->ray.cos_angle = cos(angle);
-	game->ray.sin_angle = sin(angle);
-	while (!touch(game->ray.ray_x, game->ray.ray_y, game))
-	{
-		game->ray.ray_x += game->ray.cos_angle;
-		game->ray.ray_y += game->ray.sin_angle;
-	}
-	dist = fix_distance((game->player.x * TEXT_SIZE + TEXT_SIZE / 2), (game->player.y * TEXT_SIZE + TEXT_SIZE / 2), game->ray.ray_x, game->ray.ray_y, game);
-	if (dist < 1)
-		dist = 1;
-	height = (TEXT_SIZE / dist) * (game->win_width / 2);
-	start_y = (int)((game->win_height - height) / 2);
-	end = (int)(start_y + height);
-	while (start_y < end)
-	{
-		put_pixel(i, start_y, 255, game);
-		start_y++;
-	}
+	setup_ray(game, angle);
+	DDA_grid_step(game, &game->ray);
+	perpend_dist(&game->ray);
+	wall_height(game, &game->ray);
+	draw_wall_column(i, game, &game->ray);
 }
