@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/05 11:23:31 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:46:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <X11/keysym.h>
 
 # define TEXT_SIZE 32 //64x64? ou 32x32?
+# define SPEED 0.015 // movement speed player
+# define ANGLE_SPEED 0.015 // speed da camera
+
 
 # define W 119
 # define A 97
@@ -160,8 +163,8 @@ void	draw_wall_column(int x, t_game *game, t_ray *ray);
 // PLAYER MOVEMENT
 double	rotate_player(t_player *player);
 int		move_player(t_player *player, t_map *map);
-void	move_vertical(t_player *player, t_map *map, double speed);
-void	move_horizontal(t_player *player, t_map *map, double speed);
+void	move_vertical(t_player *player, t_map *map);
+void	move_horizontal(t_player *player, t_map *map);
 
 // KEY EVENTS
 int		key_press(int keysym, t_game *game);

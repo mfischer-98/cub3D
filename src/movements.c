@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:56:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/02 10:41:07 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:44:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,18 @@ int	not_wall(t_map *map, double x, double y)
 
 double	rotate_player(t_player *player)
 {
-	double	angle_speed; // double is 8 bytes, can change to float 4bytes but less precise
-
-	angle_speed = 0.02;
 	if (player->left_rotate)
-		player->angle -= angle_speed;
+		player->angle -= ANGLE_SPEED;
 	if (player->right_rotate)
-		player->angle += angle_speed;
+		player->angle += ANGLE_SPEED;
 	while (player->angle > 2 * PI) // Need to normalize the angle so it is within a circle 2PI
 		player->angle = 0;
 	while (player->angle < 0) // Completing the circle
 		player->angle = 2 * PI;
-	return (angle_speed);
+	return (ANGLE_SPEED);
 }
 
-void	move_vertical(t_player *player, t_map *map, double speed)
+void	move_vertical(t_player *player, t_map *map)
 {
 	double	cos_angle;
 	double	sin_angle;
@@ -51,21 +48,21 @@ void	move_vertical(t_player *player, t_map *map, double speed)
 	sin_angle = sin(player->angle);
 	if (player->key_up)
 	{
-		if (not_wall(map, player->x + cos_angle * speed, player->y))
-			player->x += cos_angle * speed;
-		if (not_wall(map, player->x, player->y + sin_angle * speed))
-			player->y += sin_angle * speed;
+		if (not_wall(map, player->x + cos_angle * SPEED, player->y))
+			player->x += cos_angle * SPEED;
+		if (not_wall(map, player->x, player->y + sin_angle * SPEED))
+			player->y += sin_angle * SPEED;
 	}
 	if (player->key_down)
 	{
-		if (not_wall(map, player->x - cos_angle * speed, player->y))
-			player->x -= cos_angle * speed;
-		if (not_wall(map, player->x, player->y - sin_angle * speed))
-			player->y -= sin_angle * speed;
+		if (not_wall(map, player->x - cos_angle * SPEED, player->y))
+			player->x -= cos_angle * SPEED;
+		if (not_wall(map, player->x, player->y - sin_angle * SPEED))
+			player->y -= sin_angle * SPEED;
 	}
 }
 
-void	move_horizontal(t_player *player, t_map *map, double speed)
+void	move_horizontal(t_player *player, t_map *map)
 {
 	double	cos_angle;
 	double	sin_angle;
@@ -74,27 +71,24 @@ void	move_horizontal(t_player *player, t_map *map, double speed)
 	sin_angle = sin(player->angle);
 	if (player->key_right)
 	{
-		if (not_wall(map, player->x - sin_angle * speed, player->y))
-			player->x -= sin_angle * speed;
-		if (not_wall(map, player->x, player->y + cos_angle * speed))
-			player->y += cos_angle * speed;
+		if (not_wall(map, player->x - sin_angle * SPEED, player->y))
+			player->x -= sin_angle * SPEED;
+		if (not_wall(map, player->x, player->y + cos_angle * SPEED))
+			player->y += cos_angle * SPEED;
 	}
 	if (player->key_left)
 	{
-		if (not_wall(map, player->x + sin_angle * speed, player->y))
-			player->x += sin_angle * speed;
-		if (not_wall(map, player->x, player->y - cos_angle * speed))
-			player->y -= cos_angle * speed;
+		if (not_wall(map, player->x + sin_angle * SPEED, player->y))
+			player->x += sin_angle * SPEED;
+		if (not_wall(map, player->x, player->y - cos_angle * SPEED))
+			player->y -= cos_angle * SPEED;
 	}
 }
 
 int	move_player(t_player *player, t_map *map)
 {
-	double	speed;
-
-	speed = 0.05;
 	rotate_player(player);
-	move_vertical(player, map, speed);
-	move_horizontal(player, map, speed);
+	move_vertical(player, map);
+	move_horizontal(player, map);
 	return (0);
 }

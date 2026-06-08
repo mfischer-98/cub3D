@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/05 09:41:50 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/08 17:48:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ t_game	init_game_data(void)
 	game.map.orient = 0;
 	init_player(&game.player);
 	init_ray(&game.ray);
-	game.texture.floor = 0;
-	game.texture.ceiling = 0;
+	game.texture.floor = 0x7A5C3C;
+	game.texture.ceiling = 0x87CEEB;
 	return (game);
 }
