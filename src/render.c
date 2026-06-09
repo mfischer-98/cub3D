@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/08 17:48:10 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/09 10:49:17 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,15 @@ void	put_pixel(int x, int y, int color, t_game *game)
 
 void draw_wall_column(int x, t_game *game, t_ray *ray)
 {
-    int y;
-	int	color;
+	int	y;
 
-	color = 0xFFFFFF;
-    y = 0;
-	if (ray->side == 1)
-		color = 0xAAAAAA; 
-    while (y < ray->draw_start)
-        put_pixel(x, y++, game->texture.ceiling, game);
-    while (y <= ray->draw_end)
-        put_pixel(x, y++, color, game);
-    while (y < game->win_height)
-        put_pixel(x, y++, game->texture.floor, game);
+	y = 0;
+	while (y < ray->draw_start)
+		put_pixel(x, y++, game->texture.ceiling, game);
+	if (ray->hit == 1)
+		y = render_walls(x, y, game, ray);
+	while (y < game->win_height)
+		put_pixel(x, y++, game->texture.floor, game);
 }
 
 /* Clears old square when player moves */

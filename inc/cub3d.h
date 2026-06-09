@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/08 17:46:03 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/09 10:58:49 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,23 @@ typedef struct s_map
 	int			start;
 }			t_map;
 
+typedef struct s_img
+{
+	void	*img;
+	char	*buffer;
+	int		width;
+	int		height;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}			t_img;
+
 typedef struct s_textures
 {
-	void		*n_wall;
-	void		*s_wall;
-	void		*e_wall;
-	void		*w_wall;
+	t_img		n_wall;
+	t_img		s_wall;
+	t_img		e_wall;
+	t_img		w_wall;
 	int			floor;
 	int			ceiling;
 }			t_textures;
@@ -84,6 +95,7 @@ typedef struct s_ray
 
 	int		hit; //flags pra saber se bateu na parede e qual lado
 	int		side;
+	char	wall_face;
 
 	double	p_dist; // perpendicular distance
 	int		line_height;
@@ -150,6 +162,15 @@ int		render_scene(t_game *game);
 void	clear_image(t_game *game);
 void	draw_map(t_game *game);
 
+// TEXTURES
+void	load_textures(t_game *game);
+char	*get_wall_path(t_game *game, char c);
+void	get_buffers(t_textures *textures);
+t_img	*get_face_texture(char face, t_game *game);
+int		get_texture_color(t_img *text, int text_x, int text_y);
+int		render_walls(int x, int y, t_game *game, t_ray *ray);
+
+
 // DDA RAYCASTING
 void	DDA_grid_step(t_game *game, t_ray *ray);
 void	DDA_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y);
@@ -159,6 +180,9 @@ void	wall_height(t_game *game, t_ray *ray);
 void	ray_reset(t_game *game);
 void	setup_ray(t_game *game, double angle);
 void	draw_wall_column(int x, t_game *game, t_ray *ray);
+int		touch(double px, double py, t_game *game);
+void	ray_line(double angle, int i, t_game *game);
+void	get_wall_face(int step_x, int step_y, t_ray *ray);
 
 // PLAYER MOVEMENT
 double	rotate_player(t_player *player);
@@ -169,10 +193,6 @@ void	move_horizontal(t_player *player, t_map *map);
 // KEY EVENTS
 int		key_press(int keysym, t_game *game);
 int		key_release(int keysym, t_game *game);
-
-// RAY
-int		touch(double px, double py, t_game *game);
-void	ray_line(double angle, int i, t_game *game);
 
 // FREE DATA
 int		close_window(t_game *game);
