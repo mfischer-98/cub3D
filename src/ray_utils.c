@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 09:11:07 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/05 11:36:03 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/09 10:48:42 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	ray_reset(t_game *game)
 	game->ray.side_y = 0;
 	game->ray.hit = 0;
 	game->ray.side = 0;
+	game->ray.wall_face = 0;
 	game->ray.p_dist = 0;
 	game->ray.line_height = 0;
 	game->ray.draw_start = 0;

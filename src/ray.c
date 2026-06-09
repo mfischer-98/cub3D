@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 09:09:27 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/05 11:40:14 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/09 09:18:07 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,31 +49,44 @@ void	DDA_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y)
 
 	while (ray->hit == 0)
 	{
-		// Linha y (VERTICAL) está mais perto
-		if (ray->side_x < ray->side_y)
+		if (ray->side_x < ray->side_y) // Linha y (VERTICAL) está mais perto
 		{
-			//avanço a distancia para prox linha vertical
-			ray->side_x += ray->delta_x;
-			//avanca grid no mapa
-			ray->map_x += step_x;
-			//marca que estamos no lado X, que é vertical
-			ray->side = 0;
+			ray->side_x += ray->delta_x; //avanço a distancia para prox linha vertical
+			ray->map_x += step_x; //avanca grid no mapa
+			ray->side = 0; //marca que estamos no lado X, que é vertical
 		}
-		// Linha x (HORIZONTAL) está mais perto
-		else
+		else // Linha x (HORIZONTAL) está mais perto
 		{
-			//avanço a distancia para prox linha horizontal
-			ray->side_y += ray->delta_y;
-			//avanca grid no mapa
-			ray->map_y += step_y;
-			//marca que estamos no lado Y, que é horizontal
-			ray->side = 1;
+			ray->side_y += ray->delta_y; //avanço a distancia para prox linha horizontal
+			ray->map_y += step_y; //avanca grid no mapa
+			ray->side = 1; //marca que estamos no lado Y, que é horizontal
 		}
 		if (ray->map_y < 0 || ray->map_y >= game->map.height
 			|| ray->map_x < 0 || ray->map_x >= game->map.width)
 			break ;
 		if (game->map.design[ray->map_y][ray->map_x] == '1')
+		{
+			get_wall_face(step_x, step_y, ray);
 			ray->hit = 1;
+		}
+	}
+}
+
+void	get_wall_face(int step_x, int step_y, t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		if (step_x > 0)
+			ray->wall_face = 'W';
+		else
+			ray->wall_face = 'E';
+	}
+	else
+	{
+		if (step_y > 0)
+			ray->wall_face = 'N';
+		else
+			ray->wall_face = 'S';
 	}
 }
 

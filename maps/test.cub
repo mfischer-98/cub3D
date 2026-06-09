@@ -1,7 +1,7 @@
-NO ./inc/textures/wall.xpm
-SO ./inc/textures/wall.xpm
-WE ./inc/textures/wall.xpm
-EA ./inc/textures/wall.xpm
+NO ./inc/textures/StoneWall_North.xpm
+SO ./inc/textures/StoneWall_South.xpm
+WE ./inc/textures/StoneWall_West.xpm
+EA ./inc/textures/StoneWall_East.xpm
 
 F 220,100,0
 C 225,90,0
