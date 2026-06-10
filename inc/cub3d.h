@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/09 10:58:49 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/10 17:29:08 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@
 # define S 115
 # define D 100
 # define PI 3.14159265359
+# define WALL_FOG_START 1.0 // distancia onde parede comeca a escurecer
+# define WALL_FOG_END 3.0 // distancia onde parede fica totalmente escura
+# define BORDER_FOG_START 0.25 // distancia onde escuridão comeca
+# define BORDER_FOG_END 0.4 // distancia onde escuridão é total
+# define BORDER_FOG_NEAR 0.2 // Nao mudar estes
+# define BORDER_FOG_FAR 0.5 // Nao mudar estes
 
 typedef struct s_map
 {
@@ -158,6 +164,8 @@ void	init_ray(t_ray *ray);
 // PUT PIXELS
 void	put_pixel(int x, int y, int color, t_game *game);
 void	draw_square(int x, int y, int size, int color, t_game *game);
+int		apply_fog(int color, double dist, double fog_start, double fog_end);
+int		apply_fog_row(int color, int y, int height);
 int		render_scene(t_game *game);
 void	clear_image(t_game *game);
 void	draw_map(t_game *game);
