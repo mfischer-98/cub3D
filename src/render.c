@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/09 10:49:17 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/10 17:24:17 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,21 @@ void	put_pixel(int x, int y, int color, t_game *game)
 void draw_wall_column(int x, t_game *game, t_ray *ray)
 {
 	int	y;
+	int	color;
 
 	y = 0;
 	while (y < ray->draw_start)
-		put_pixel(x, y++, game->texture.ceiling, game);
+	{
+		color = apply_fog_row(game->texture.ceiling, y, game->win_height);
+		put_pixel(x, y++, color, game);
+	}
 	if (ray->hit == 1)
 		y = render_walls(x, y, game, ray);
 	while (y < game->win_height)
-		put_pixel(x, y++, game->texture.floor, game);
+	{
+		color = apply_fog_row(game->texture.floor, y, game->win_height);
+		put_pixel(x, y++, color, game);
+	}
 }
 
 /* Clears old square when player moves */

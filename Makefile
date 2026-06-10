@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+         #
+#    By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/07 11:08:27 by mefische          #+#    #+#              #
-#    Updated: 2026/06/09 11:05:48 by mefische         ###   ########.fr        #
+#    Updated: 2026/06/10 17:29:02 by ntomas-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,9 +15,9 @@ NAME = cub3D
 MLX_URL		= git@github.com:42paris/minilibx-linux
 
 SRC = src/main.c src/init.c src/events.c src/free_data.c src/render.c src/movements.c src/ray.c src/ray_utils.c src/debug_tools.c \
-		src/load_textures.c src/render_walls.c \
+		src/load_textures.c src/render_walls.c src/fog.c \
 		src/parser/parser.c src/parser/parser_utils.c src/parser/parser_args.c  src/parser/parser_textures.c src/parser/parser_colors.c \
-		src/parser/get_map.c src/parser/parser_walls.c 
+		src/parser/get_map.c src/parser/parser_walls.c
 
 MLX_PATH	= inc/mlx
 MLX_ARC		= $(MLX_PATH)/libmlx_Linux.a

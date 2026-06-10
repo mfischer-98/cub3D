@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_colors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:21:31 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:09:55 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/10 17:03:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int	check_rgb_format(char *str)
 		return (free(trimmed), free_array(rgb), 1);
 	if ((ft_atoi(rgb[2]) > 255))
 		return (free(trimmed), free_array(rgb), 1);
+	// Usar RGB pa meter cor no teto/chao
 	free_array(rgb);
 	free(trimmed);
 	return (0);
