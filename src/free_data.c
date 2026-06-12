@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:39:46 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:05:23 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/12 14:54:02 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	free_data(t_game *game)
 	free_map(&game->map);
 }
 
-// void	free_images(t_game *game)
-// {
-// 	if (game->img_wall_center1)
-// 		mlx_destroy_image(game->mlx, game->img_wall_center1);
-// }
+void	free_texture(t_game *game, t_img *img)
+{
+	if (img->img)
+		mlx_destroy_image(game->mlx, img->img);
+}

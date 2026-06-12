@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/10 17:24:17 by ntomas-g         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:15:57 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	render_scene(t_game *game)
 	i = 0;
 	while(i < game->win_width)
 	{
-		ray_line(angle, i, game);
+		ray_line(i, game);
 		angle += step;
 		i++;
 	}

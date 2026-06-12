@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:56:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/10 17:28:50 by ntomas-g         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:14:05 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ double	rotate_player(t_player *player)
 		player->angle = 0;
 	while (player->angle < 0) // Completing the circle
 		player->angle = 2 * PI;
+	player->dir_x = cos(player->angle);
+	player->dir_y = sin(player->angle);
+	player->plane_x = -player->dir_y * 0.66;
+	player->plane_y = player->dir_x * 0.66;
 	return (ANGLE_SPEED);
 }
 

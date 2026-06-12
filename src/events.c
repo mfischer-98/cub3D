@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:17:17 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:07:12 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/12 14:53:14 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,12 @@ int	key_press(int keysym, t_game *game)
 /* Before closing the window it frees all data */
 int	close_window(t_game *game)
 {
-	//free_textures(game);
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
+	free_texture(game, &game->texture.n_wall);
+	free_texture(game, &game->texture.s_wall);
+	free_texture(game, &game->texture.w_wall);
+	free_texture(game, &game->texture.e_wall);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
 	free(game->mlx);

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 09:11:07 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/09 10:48:42 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:11:53 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,12 @@ void	ray_reset(t_game *game)
 	game->ray.draw_end = 0;
 }
 
-void	setup_ray(t_game *game, double angle)
+void	setup_ray(t_game *game, int i)
 {
+	double	camera_x;
+
+	camera_x = 2.0 * i / (double)game->win_width - 1.0;
+	
 	/* PLayer position = ray origin */
 	game->ray.map_x = (int)game->player.x;
 	game->ray.map_y = (int)game->player.y;
@@ -65,8 +69,8 @@ void	setup_ray(t_game *game, double angle)
 	game->ray.pos_y = game->player.y;
 
 	/* Ray direction */
-	game->ray.dir_x = cos(angle);
-	game->ray.dir_y = sin(angle);
+	game->ray.dir_x = game->player.dir_x + game->player.plane_x * camera_x;
+	game->ray.dir_y = game->player.dir_y + game->player.plane_y * camera_x;
 
 	/* Distance needed to cross one grid line on x */
 	if (game->ray.dir_x == 0)
@@ -81,7 +85,3 @@ void	setup_ray(t_game *game, double angle)
 		game->ray.delta_y = fabs(1.0 / game->ray.dir_y);
 	ray_reset(game);
 }
-
-
-
-

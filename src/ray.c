@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 09:09:27 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/09 09:18:07 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:15:39 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ void	get_wall_face(int step_x, int step_y, t_ray *ray)
 	}
 }
 
-void	ray_line(double angle, int i, t_game *game)
+void	ray_line(int i, t_game *game)
 {
-	setup_ray(game, angle);
+	setup_ray(game, i);
 	DDA_grid_step(game, &game->ray);
 	perpend_dist(&game->ray);
 	wall_height(game, &game->ray);
