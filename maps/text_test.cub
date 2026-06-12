@@ -1,7 +1,7 @@
-NO ./inc/textures/wall_oldred.xpm
-SO ./inc/textures/wall_oldred.xpm
-WE ./inc/textures/wall_oldred_dark.xpm
-EA ./inc/textures/wall_oldred_dark.xpm
+NO ./inc/textures/Red_DarkWall_01.xpm
+SO ./inc/textures/Red_LightWall_01.xpm
+WE ./inc/textures/Red_DarkWall_02.xpm
+EA ./inc/textures/Red_LightWall_02.xpm
 
 F 220,100,0
 C 225,90,0
