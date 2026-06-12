@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/10 17:24:42 by ntomas-g         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:14:59 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	get_player_angle(t_game *game)
 void	init_player(t_player *player)
 {
 	player->angle = 0;
+	player->plane_x = 0;
+	player->plane_y = 0;
+	player->dir_x = 0;
+	player->dir_y = 0;
 	player->key_up = false;
 	player->key_down = false;
 	player->key_left = false;

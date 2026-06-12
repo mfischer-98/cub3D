@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/10 17:29:08 by ntomas-g         ###   ########.fr       */
+/*   Updated: 2026/06/12 15:16:12 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ typedef struct s_player
 	double		x;
 	double		y;
 	double		angle;
-
+	double		dir_x;
+	double		dir_y;
+	double		plane_x;
+	double		plane_y;
 	bool		key_up;
 	bool		key_down;
 	bool		key_left;
@@ -178,18 +181,16 @@ t_img	*get_face_texture(char face, t_game *game);
 int		get_texture_color(t_img *text, int text_x, int text_y);
 int		render_walls(int x, int y, t_game *game, t_ray *ray);
 
-
 // DDA RAYCASTING
 void	DDA_grid_step(t_game *game, t_ray *ray);
 void	DDA_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y);
-void	ray_line(double angle, int i, t_game *game);
 void	perpend_dist(t_ray *ray);
 void	wall_height(t_game *game, t_ray *ray);
 void	ray_reset(t_game *game);
-void	setup_ray(t_game *game, double angle);
+void	setup_ray(t_game *game, int i);
 void	draw_wall_column(int x, t_game *game, t_ray *ray);
 int		touch(double px, double py, t_game *game);
-void	ray_line(double angle, int i, t_game *game);
+void	ray_line(int i, t_game *game);
 void	get_wall_face(int step_x, int step_y, t_ray *ray);
 
 // PLAYER MOVEMENT
@@ -207,5 +208,6 @@ int		close_window(t_game *game);
 void	free_array(char **array);
 void	free_data(t_game *game);
 void	free_map(t_map *map);
+void	free_texture(t_game *game, t_img *img);
 
 #endif

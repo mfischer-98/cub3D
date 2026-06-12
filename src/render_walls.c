@@ -100,14 +100,12 @@ int	render_walls(int x, int y, t_game *game, t_ray *ray)
 	int		color;
 
 	text = get_face_texture(ray->wall_face, game);
-	if (!text || !text->buffer)
-		return (y);
-	wall_height = ray->draw_end - ray->draw_start;
+	wall_height = ray->line_height;
 	if (wall_height <= 0)
 		return (y);
 	text_x = get_text_x(text, ray);
-	step = (double)text->height / (double)wall_height;
-	text_pos = 0.0;
+	step = 1.0 * text->height / ray->line_height;
+	text_pos = (ray->draw_start - game->win_height / 2 + ray->line_height / 2) * step;
 	while (y <= ray->draw_end)
 	{
 		text_y = (int)text_pos;
