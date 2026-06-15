@@ -49,23 +49,9 @@ int	get_texture_color(t_img *text, int text_x, int text_y)
 	return (color);
 }
 
-/* Flips the horizontal texture coordinate when needed.
-	Some wall faces would appear mirrored if we used text_x directly,
-	so depending on which side was hit and the ray direction,
-	we reverse the texture column. */
-int	flip_text(int text_x, t_img *text, t_ray *ray)
-{
-	if (ray->side == 0 && ray->dir_x > 0)
-		text_x = text->width - text_x - 1;
-	if (ray->side == 1 && ray->dir_y < 0)
-		text_x = text->width - text_x - 1;
-	return (text_x);
-}
-
 /* Computes the horizontal texture coordinate (text_x) for this wall slice.
 	It finds the exact point where the ray hit the wall, keeps only the
-	fractional part inside the tile, converts that into a texture column,
-	and then applies flip_text() if the texture must be mirrored. */
+	fractional part inside the tile, converts that into a texture column */
 int	get_text_x(t_img *text, t_ray *ray)
 {
 	double	wall_x;
@@ -81,7 +67,6 @@ int	get_text_x(t_img *text, t_ray *ray)
 		text_x = 0;
 	if (text_x >= text->width)
 		text_x = text->width - 1;
-	text_x = flip_text(text_x, text, ray);
 	return (text_x);
 }
 
