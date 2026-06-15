@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_colors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:21:31 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/10 17:03:46 by marvin           ###   ########.fr       */
+/*   Updated: 2026/06/15 16:16:47 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,32 +36,52 @@ int	check_rgb_number(char **str)
 	return (0);
 }
 
+void	add_values(char **rgb, char c, t_game *game)
+{
+	char	*trimmed;
+
+	trimmed = ft_strtrim(rgb[0], " \t");
+	if (c == 'f')
+	{
+		game->texture.floor[0] = ft_atoi((trimmed));
+		game->texture.floor[1] = ft_atoi((rgb[1]));
+		game->texture.floor[2] = ft_atoi((rgb[2]));
+	}
+	else
+	{
+		game->texture.ceiling[0] = ft_atoi((trimmed));
+		game->texture.ceiling[1] = ft_atoi((rgb[1]));
+		game->texture.ceiling[2] = ft_atoi((rgb[2]));
+	}
+	free(trimmed);
+}
+
 /* Splits RGB and checks if numbers are below 256 */
-int	check_rgb_format(char *str)
+int	check_rgb_format(char *str, t_game *game, char c)
 {
 	char	**rgb;
-	char	*trimmed;
 
 	rgb = ft_split(str, ',');
 	if (!rgb)
 		return (1);
-	trimmed = ft_strtrim(rgb[0], " \t");
+	if (c == 'f')
+		add_values(rgb, 'f', game);
+	else
+		add_values(rgb, 'c', game);
 	if (check_rgb_number(rgb))
-		return (free(trimmed), free_array(rgb), 1);
-	if ((ft_atoi((trimmed)) > 255))
-		return (free(trimmed), free_array(rgb), 1);
-	if ((ft_atoi(rgb[1]) > 255))
-		return (free(trimmed), free_array(rgb), 1);
-	if ((ft_atoi(rgb[2]) > 255))
-		return (free(trimmed), free_array(rgb), 1);
-	// Usar RGB pa meter cor no teto/chao
+		return (free_array(rgb), 1);
+	if ((game->texture.floor[0] > 255) || (game->texture.ceiling[0] > 255))
+		return (free_array(rgb), 1);
+	if ((game->texture.floor[1] > 255) || (game->texture.ceiling[1] > 255))
+		return (free_array(rgb), 1);
+	if ((game->texture.floor[2] > 255) || (game->texture.ceiling[2] > 255))
+		return (free_array(rgb), 1);
 	free_array(rgb);
-	free(trimmed);
 	return (0);
 }
 
 /* Gets RGB from map->config and returns error if invalid */
-int	check_colors(t_map *map)
+int	check_colors(t_map *map, t_game *game)
 {
 	int	i;
 	int	j;
@@ -72,13 +92,15 @@ int	check_colors(t_map *map)
 		j = 0;
 		while (map->config[i][j])
 		{
-			if (map->config[i][j] == 'F' || map->config[i][j] == 'C')
+			if (map->config[i][j] == 'F' && check_rgb_format(&map->config[i][j + 2], game, 'f'))
 			{
-				if (check_rgb_format(&map->config[i][j + 2]))
-				{
-					printf("Error\nInvalid RGB value\n");
-					return (1);
-				}
+				printf("Error\nInvalid RGB value\n");
+				return (1);
+			}
+			else if (map->config[i][j] == 'C' && check_rgb_format(&map->config[i][j + 2], game, 'c'))
+			{
+				printf("Error\nInvalid RGB value\n");
+				return (1);
 			}
 			j++;
 		}

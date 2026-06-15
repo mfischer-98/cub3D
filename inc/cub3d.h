@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/12 15:16:12 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:15:20 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ typedef struct s_textures
 	t_img		s_wall;
 	t_img		e_wall;
 	t_img		w_wall;
-	int			floor;
-	int			ceiling;
+	int			hex_floor;
+	int			hex_ceiling;
+	int			floor[3];
+	int			ceiling[3];
 }			t_textures;
 
 typedef struct s_player
@@ -141,8 +143,8 @@ int		read_config(char *map_file, t_map *map);
 int		get_line(t_map *map, char *line, int *count);
 int		check_duplicates(t_map *map);
 void	id_count(char id, int *counter);
-int		check_colors(t_map *map);
-int		check_rgb_format(char *str);
+int		check_colors(t_map *map, t_game *game);
+int	check_rgb_format(char *str, t_game *game, char c);
 int		check_rgb_number(char **str);
 void	read_map(char *map_file, t_map *map);
 void	get_map_design(t_map *map, char *line, int fd);
@@ -180,6 +182,7 @@ void	get_buffers(t_textures *textures);
 t_img	*get_face_texture(char face, t_game *game);
 int		get_texture_color(t_img *text, int text_x, int text_y);
 int		render_walls(int x, int y, t_game *game, t_ray *ray);
+int		convert_rgb(int *rgb);
 
 // DDA RAYCASTING
 void	DDA_grid_step(t_game *game, t_ray *ray);

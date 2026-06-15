@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 08:35:08 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/09 10:57:00 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:28:24 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ char *get_wall_path(t_game *game, char c)
 		i++;
 	}
 	return (NULL);
+}
+
+int	convert_rgb(int *rgb)
+{
+	int		i;
+	int		res;
+
+	res = 0;
+	i = 0;
+	while (i < 3)
+	{
+		res = (res << 8) + rgb[i];
+		i++;
+	}
+	return (res);
 }
 
 void	get_buffers(t_textures *textures)
@@ -60,6 +75,8 @@ void	load_textures(t_game *game)
 		(game->mlx, get_wall_path(game, 'W'),
 		&game->texture.w_wall.width, &game->texture.w_wall.height);
 	get_buffers(&game->texture);
+	game->texture.hex_floor = convert_rgb(game->texture.floor);
+	game->texture.hex_ceiling = convert_rgb(game->texture.ceiling);
 }
 
 

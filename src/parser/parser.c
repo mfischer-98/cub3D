@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:28:00 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 15:24:48 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	parsing(int ac, char **args, t_game *game)
 		return (1);
 	if (check_duplicates(&game->map))
 		return (1);
-	if (check_colors(&game->map))
+	if (check_colors(&game->map, game))
 		return (1);
 	read_map(args[1], &game->map);
 	if (check_blank_lines(&game->map))
