@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 09:11:07 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/12 15:11:53 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 12:02:23 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	perpend_dist(t_ray *ray)
 void	wall_height(t_game *game, t_ray *ray)
 {
 	// Quanto menos a distancia (pdist), maior a parede
-	ray->line_height = (int)(game->win_height / ray->p_dist);
+	ray->line_height = (int)((game->win_height / ray->p_dist) * 1.8);
 	// Draw_start: center of line + center of window
 	// Remember in MLX y decreases as it goes up so -
 	ray->draw_start = -ray->line_height / 2 + game->win_height / 2;
