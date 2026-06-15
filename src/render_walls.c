@@ -43,7 +43,8 @@ int	get_texture_color(t_img *text, int text_x, int text_y)
 		text_y = 0;
 	if (text_y >= text->height)
 		text_y = text->height - 1;
-	pixel = text->buffer + ((text_y * text->line_length) + (text_x * (text->bpp / 8)));
+	pixel = text->buffer + ((text_y * text->line_length)
+			+ (text_x * (text->bpp / 8)));
 	color = *(int *)pixel;
 	return (color);
 }
@@ -93,7 +94,7 @@ int	render_walls(int x, int y, t_game *game, t_ray *ray)
 {
 	t_img	*text;
 	int		wall_height;
-	int		text_x; //preciso das cordenadas da matriz para o pixel que quero colocar
+	int		text_x;
 	int		text_y;
 	double	text_pos;
 	double	step;
@@ -105,7 +106,8 @@ int	render_walls(int x, int y, t_game *game, t_ray *ray)
 		return (y);
 	text_x = get_text_x(text, ray);
 	step = 1.0 * text->height / ray->line_height;
-	text_pos = (ray->draw_start - game->win_height / 2 + ray->line_height / 2) * step;
+	text_pos = (ray->draw_start - game->win_height / 2
+			+ ray->line_height / 2) * step;
 	while (y <= ray->draw_end)
 	{
 		text_y = (int)text_pos;
@@ -116,4 +118,3 @@ int	render_walls(int x, int y, t_game *game, t_ray *ray)
 	}
 	return (y);
 }
-

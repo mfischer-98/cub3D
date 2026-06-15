@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/12 15:22:41 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:39:24 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,17 @@
 /* Starts mlx and creates a window */
 void	init_game(t_game *game)
 {
-	game->win_width = (game->map.width) * TEXT_SIZE;
-	game->win_height = (game->map.height - 1) * TEXT_SIZE; //BUG: HEIGHT IS WIDTH?? 
+	game->win_width = (game->map.width) * TILE_SIZE;
+	game->win_height = (game->map.height - 1) * TILE_SIZE;
 	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, game->win_width,  game->win_height, "cub3D");
+	game->win = mlx_new_window(game->mlx, game->win_width,
+			game->win_height, "cub3D");
 	if (!game->win)
 		return (close_window(game), (void)1);
-	game->img = mlx_new_image(game->mlx, game->win_width, game->win_height);
-	game->data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
+	game->img = mlx_new_image(game->mlx, game->win_width,
+			game->win_height);
+	game->data = mlx_get_data_addr(game->img, &game->bpp,
+			&game->size_line, &game->endian);
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
 }
 

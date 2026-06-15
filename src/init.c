@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/12 15:14:59 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:32:54 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_player_angle(t_game *game)
 {
 	if (game->map.orient == 'N')
-		game->player.angle = ( 3 * PI ) / 2;
+		game->player.angle = (3 * PI) / 2;
 	if (game->map.orient == 'S')
 		game->player.angle = PI / 2;
 	if (game->map.orient == 'W')
@@ -59,6 +59,18 @@ void	init_ray(t_ray *ray)
 	ray->draw_end = 0;
 }
 
+void	init_textures(t_textures *text)
+{
+	text->floor[0] = 0;
+	text->floor[1] = 0;
+	text->floor[2] = 0;
+	text->ceiling[0] = 0;
+	text->ceiling[1] = 0;
+	text->ceiling[2] = 0;
+	text->hex_floor = 0;
+	text->hex_ceiling = 0;
+}
+
 t_game	init_game_data(void)
 {
 	t_game	game;
@@ -81,7 +93,6 @@ t_game	init_game_data(void)
 	game.map.orient = 0;
 	init_player(&game.player);
 	init_ray(&game.ray);
-	game.texture.floor = 0x524336;
-	game.texture.ceiling = 0x000000;
+	init_textures(&game.texture);
 	return (game);
 }

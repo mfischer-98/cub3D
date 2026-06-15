@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 14:56:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/12 15:14:05 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:34:08 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,18 @@ int	not_wall(t_map *map, double x, double y)
 	return (1);
 }
 
+/* Player rotation
+	- If > 2PI, need to normalize so it is in the circle
+	- If = 0, completed circle */
 double	rotate_player(t_player *player)
 {
 	if (player->left_rotate)
 		player->angle -= ANGLE_SPEED;
 	if (player->right_rotate)
 		player->angle += ANGLE_SPEED;
-	while (player->angle > 2 * PI) // Need to normalize the angle so it is within a circle 2PI
+	while (player->angle > 2 * PI)
 		player->angle = 0;
-	while (player->angle < 0) // Completing the circle
+	while (player->angle < 0)
 		player->angle = 2 * PI;
 	player->dir_x = cos(player->angle);
 	player->dir_y = sin(player->angle);
