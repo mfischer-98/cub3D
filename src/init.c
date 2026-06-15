@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:22:31 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:32:54 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	get_player_angle(t_game *game)
 {
 	if (game->map.orient == 'N')
-		game->player.angle = ( 3 * PI ) / 2;
+		game->player.angle = (3 * PI) / 2;
 	if (game->map.orient == 'S')
 		game->player.angle = PI / 2;
 	if (game->map.orient == 'W')

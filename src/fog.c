@@ -14,7 +14,7 @@
 
 int	apply_fog(int color, double dist, double fog_start, double fog_end)
 {
-	double	f;
+	double			f;
 	unsigned int	r;
 	unsigned int	g;
 	unsigned int	b;
@@ -41,7 +41,7 @@ int	apply_fog_row(int color, int y, int height)
 {
 	double	factor;
 	double	dist;
-	int	center;
+	int		center;
 
 	center = height / 2;
 	factor = fabs((double)y - (double)center) / (double)center;

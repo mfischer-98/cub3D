@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 09:11:07 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 12:02:23 by ntomas-g         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:42:22 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,20 @@ void	setup_ray(t_game *game, int i)
 	double	camera_x;
 
 	camera_x = 2.0 * i / (double)game->win_width - 1.0;
-	
 	/* PLayer position = ray origin */
 	game->ray.map_x = (int)game->player.x;
 	game->ray.map_y = (int)game->player.y;
-	
 	/* Ray direction */
 	game->ray.pos_x = game->player.x;
 	game->ray.pos_y = game->player.y;
-
 	/* Ray direction */
 	game->ray.dir_x = game->player.dir_x + game->player.plane_x * camera_x;
 	game->ray.dir_y = game->player.dir_y + game->player.plane_y * camera_x;
-
 	/* Distance needed to cross one grid line on x */
 	if (game->ray.dir_x == 0)
 		game->ray.delta_x = 1e30;
 	else
 		game->ray.delta_x = fabs(1.0 / game->ray.dir_x); // 1.0 pq queremos valor double
-	
 	/* Distance needed to cross one grid line on y */
 	if (game->ray.dir_y == 0)
 		game->ray.delta_y = 1e30;

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 09:09:27 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/12 15:15:39 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:35:46 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Decides which direction the ray goes and calculates the distance
 	until the first horizontal or verticla line */
-void	DDA_grid_step(t_game *game, t_ray *ray)
+void	dda_grid_step(t_game *game, t_ray *ray)
 {
 	int	step_x;
 	int	step_y;
@@ -39,14 +39,13 @@ void	DDA_grid_step(t_game *game, t_ray *ray)
 		step_y = 1;
 		ray->side_y = (ray->map_y + 1.0 - ray->pos_y) * ray->delta_y;
 	}
-	DDA_ray_loop(game, ray, step_x, step_y);
+	dda_ray_loop(game, ray, step_x, step_y);
 }
 
-void	DDA_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y)
+void	dda_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y)
 {
 	ray->hit = 0;
 	ray->side = 0;
-
 	while (ray->hit == 0)
 	{
 		if (ray->side_x < ray->side_y) // Linha y (VERTICAL) está mais perto
@@ -93,7 +92,7 @@ void	get_wall_face(int step_x, int step_y, t_ray *ray)
 void	ray_line(int i, t_game *game)
 {
 	setup_ray(game, i);
-	DDA_grid_step(game, &game->ray);
+	dda_grid_step(game, &game->ray);
 	perpend_dist(&game->ray);
 	wall_height(game, &game->ray);
 	draw_wall_column(i, game, &game->ray);

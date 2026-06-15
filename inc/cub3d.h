@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:15:20 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/15 16:41:23 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@
 # include "mlx/mlx.h"
 # include <X11/keysym.h>
 
-# define TEXT_SIZE 32 //64x64? ou 32x32?
+# define TILE_SIZE 32 //64x64? ou 32x32?
 # define SPEED 0.015 // movement speed player
 # define ANGLE_SPEED 0.015 // speed da camera
-
 
 # define W 119
 # define A 97
@@ -144,7 +143,7 @@ int		get_line(t_map *map, char *line, int *count);
 int		check_duplicates(t_map *map);
 void	id_count(char id, int *counter);
 int		check_colors(t_map *map, t_game *game);
-int	check_rgb_format(char *str, t_game *game, char c);
+int		check_rgb_format(char *str, t_game *game, char c);
 int		check_rgb_number(char **str);
 void	read_map(char *map_file, t_map *map);
 void	get_map_design(t_map *map, char *line, int fd);
@@ -163,6 +162,7 @@ void	run_file(char *line, int fd);
 t_game	init_game_data(void);
 void	init_player(t_player *player);
 void	init_game(t_game *game);
+void	init_textures(t_textures *text);
 void	get_player_angle(t_game *game);
 void	init_ray(t_ray *ray);
 
@@ -185,8 +185,8 @@ int		render_walls(int x, int y, t_game *game, t_ray *ray);
 int		convert_rgb(int *rgb);
 
 // DDA RAYCASTING
-void	DDA_grid_step(t_game *game, t_ray *ray);
-void	DDA_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y);
+void	dda_grid_step(t_game *game, t_ray *ray);
+void	dda_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y);
 void	perpend_dist(t_ray *ray);
 void	wall_height(t_game *game, t_ray *ray);
 void	ray_reset(t_game *game);
