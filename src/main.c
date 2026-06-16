@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:39:24 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:59:03 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /* Starts mlx and creates a window */
 void	init_game(t_game *game)
 {
-	game->win_width = (game->map.width) * TILE_SIZE;
-	game->win_height = (game->map.height - 1) * TILE_SIZE;
+	game->win_width = 1920;
+	game->win_height = 1080;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->win_width,
 			game->win_height, "cub3D");

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:31:14 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/16 16:04:21 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	draw_wall_column(int x, t_game *game, t_ray *ray)
 	y = 0;
 	while (y < ray->draw_start)
 	{
+		//color = game->texture.hex_ceiling;
 		color = apply_fog_row(game->texture.hex_ceiling, y, game->win_height);
 		put_pixel(x, y++, color, game);
 	}
@@ -63,6 +64,7 @@ void	draw_wall_column(int x, t_game *game, t_ray *ray)
 		y = render_walls(x, y, game, ray);
 	while (y < game->win_height)
 	{
+		//color = game->texture.hex_floor;
 		color = apply_fog_row(game->texture.hex_floor, y, game->win_height);
 		put_pixel(x, y++, color, game);
 	}

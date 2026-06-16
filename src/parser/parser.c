@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 15:24:48 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/16 14:07:23 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ int	check_player_char(t_map *map)
 			{
 				map->orient = map->design[i][j];
 				counter++;
-				if (counter != 1)
-					return (printf("Error\nInvalid player characters\n"), 1);
 			}
 			j++;
 		}
 		i++;
 	}
+	if (counter != 1)
+		return (printf("Error\nInvalid player characters\n"), 1);
 	return (0);
 }
 
@@ -107,6 +107,7 @@ int	parsing(int ac, char **args, t_game *game)
 	if (check_colors(&game->map, game))
 		return (1);
 	read_map(args[1], &game->map);
+	//check map too smalll min 3x3
 	if (check_blank_lines(&game->map))
 		return (1);
 	if (check_chars(&game->map))

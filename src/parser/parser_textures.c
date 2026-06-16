@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:36:08 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:06:45 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,9 @@ int	get_line(t_map *map, char *line, int *count)
 		return (free(line), 0);
 	if (not_identifier(line))
 	{
-		free(line);
 		printf("Error\nInvalid identifiers\n");
+		free(map->config);
+		map->config = NULL;
 		return (1);
 	}
 	trimmed = ft_strtrim(line, "\n");
@@ -110,7 +111,7 @@ int	read_config(char *map_file, t_map *map)
 	{
 		i = skip_spaces(line, i);
 		if (get_line(map, line, &count))
-			return (close(fd), 1);
+			return (free(line), close(fd), 1);
 		line = get_next_line(fd);
 	}
 	run_file(line, fd);
