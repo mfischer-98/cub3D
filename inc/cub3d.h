@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:41:23 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/16 15:58:13 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@
 # include "mlx/mlx.h"
 # include <X11/keysym.h>
 
-# define TILE_SIZE 32 //64x64? ou 32x32?
-# define SPEED 0.015 // movement speed player
-# define ANGLE_SPEED 0.015 // speed da camera
+# define TILE_SIZE 64
+# define SPEED 0.1
+# define ANGLE_SPEED 0.1
 
 # define W 119
 # define A 97

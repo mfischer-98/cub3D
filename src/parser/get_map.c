@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:23:10 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/16 14:44:17 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	map_start(char *map_file)
 	int		fd;
 	int		i;
 	int		start;
+	//int		flag;
 	char	*line;
 
 	line = NULL;
@@ -25,19 +26,24 @@ int	map_start(char *map_file)
 	if (fd < 0)
 		return (0);
 	i = 0;
+	//flag = 0;
 	start = 0;
 	while ((line = get_next_line(fd)))
 	{
+		i = 0;
 		start++;
 		while (line[i] == ' ' || line[i] == '\t')
 			i++;
 		if (line[i] == '1')
 		{
+		//	flag = 1;
 			free(line);
 			return (close(fd), start);
 		}
 		free(line);
 	}
+/* 	if (flag == 0)
+		return (erro) */
 	return (close(fd), start);
 }
 
