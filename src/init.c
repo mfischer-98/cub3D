@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:30 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:32:54 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 13:18:36 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ t_game	init_game_data(void)
 	game.bpp = 0;
 	game.size_line = 0;
 	game.endian = 0;
+	game.fog_enabled = true;
 	game.map.design = NULL;
 	game.map.config = NULL;
 	game.map.width = 0;
