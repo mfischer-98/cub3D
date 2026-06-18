@@ -6,72 +6,65 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/16 14:44:17 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 11:40:34 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
 /* Returns the number of the line where the map starts */
-int	map_start(char *map_file)
+int	map_start(char **map_file)
 {
-	int		fd;
 	int		i;
-	int		start;
-	//int		flag;
-	char	*line;
+	int		j;
 
-	line = NULL;
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		return (0);
 	i = 0;
-	//flag = 0;
-	start = 0;
-	while ((line = get_next_line(fd)))
+	while (map_file[i])
 	{
-		i = 0;
-		start++;
-		while (line[i] == ' ' || line[i] == '\t')
+		while (!not_identifier(map_file[i]))
 			i++;
-		if (line[i] == '1')
+		j = 0;
+		while (map_file[i][j])
 		{
-		//	flag = 1;
-			free(line);
-			return (close(fd), start);
+			while (map_file[i][j] == ' ' || map_file[i][j] == '\t')
+				j++;
+			if (map_file[i][j] == '1')
+				return (i);
+			j++;
 		}
-		free(line);
+		i++;
 	}
-/* 	if (flag == 0)
-		return (erro) */
-	return (close(fd), start);
+	return (0);
 }
 
 /* Returns the number the height of map so we can
 	allocate memory in map design */
-int	map_height(int start, char *map_file)
+int	map_height(int start, char **map_file)
 {
-	int		fd;
 	int		i;
+	int		j;
 	int		height;
-	char	*line;
 
+	i = start;
 	height = 0;
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	i = 0;
-	line = get_next_line(fd);
-	while (line)
+	while (map_file[i])
 	{
-		if (i >= start)
-			height++;
-		free(line);
-		line = NULL;
+		j = 0;
+		while (map_file[i][j])
+		{
+			while (map_file[i][j] == ' ' || map_file[i][j] == '\t')
+				j++;
+			if (map_file[i][j] == '1')
+			{
+				height++;
+				break ;
+			}
+			j++;
+		}
 		i++;
-		line = get_next_line(fd);
 	}
-	close(fd);
+	//if i++ && chamar !map_start, tem outro mapa
+	//if map->height < 0
 	return (height);
 }
 
@@ -91,7 +84,7 @@ void	get_map_design(t_map *map, char *line, int fd)
 		temp = convert_tabs(map->design[i]);
 		free(map->design[i]);
 		map->design[i] = temp;
-		line_trim(map->design[i]);
+		//line_trim(map->design[i]);
 		width = line_len(map->design[i]);
 		if (width > map->width)
 			map->width = width;
@@ -103,42 +96,26 @@ void	get_map_design(t_map *map, char *line, int fd)
 
 /* Opens map file and gets all the information
 	so we have it in our map struct */
-void	read_map(char *map_file, t_map *map)
+int	read_map(char **map_file, t_map *map)
 {
-	int		fd;
 	int		i;
-	char	*line;
+	int		j;
 
-	map->start = map_start(map_file) - 1;
-	map->height = map_height(map->start, map_file) + 1;
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		return ;
+	map->start = map_start(map_file);
+	if (!map->start)
+		return (printf("Error\nNo map identified\n"), 1);
+	map->height = map_height(map->start, map_file);
+	if (map->height < 3)
+		return (printf("Error\nMap too small\n"), 1);
 	map->design = malloc(sizeof(char *) * (map->height + 1));
-	if (!map->design)
-		return (close(fd), (void)1);
-	i = 0;
-	while (i < map->start)
+	i = map->start;
+	j = 0;
+	while (map_file[i] && j < map->height)
 	{
-		line = get_next_line(fd);
-		free(line);
+		map->design[j] = ft_strdup(map_file[i]);
+		j++;
 		i++;
 	}
-	get_map_design(map, line, fd);
-	close(fd);
-}
-
-void	line_trim(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] == '\r') && (str[i + 1] == '\n'))
-			str[i] = '\0';
-		else if ((str[i] == '\n') && (str[i + 1] == '\0'))
-			str[i] = '\0';
-		i++;
-	}
+	map->design[j] = NULL;
+	return (0);
 }
