@@ -97,7 +97,8 @@ int	render_walls(int x, int y, t_game *game, t_ray *ray)
 	{
 		text_y = (int)text_pos;
 		color = get_texture_color(text, text_x, text_y);
-		color = apply_fog(color, ray->p_dist, WALL_FOG_START, WALL_FOG_END);
+		if (game->fog_enabled)
+			color = apply_fog(color, ray->p_dist, WALL_FOG_START, WALL_FOG_END);
 		put_pixel(x, y++, color, game);
 		text_pos += step;
 	}

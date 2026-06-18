@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:17:17 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/12 14:53:14 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 13:22:00 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	key_press(int keysym, t_game *game)
 		game->player.right_rotate = true;
 	if (keysym == XK_Left)
 		game->player.left_rotate = true;
+	if (keysym == F)
+		game->fog_enabled = !game->fog_enabled;
 	return (0);
 }
 

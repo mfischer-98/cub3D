@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/16 15:58:13 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 13:21:15 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define A 97
 # define S 115
 # define D 100
+# define F 102
 # define PI 3.14159265359
 # define WALL_FOG_START 1.0 // distancia onde parede comeca a escurecer
 # define WALL_FOG_END 3.0 // distancia onde parede fica totalmente escura
@@ -126,6 +127,7 @@ typedef struct s_game
 	void		*img;
 	t_map		map;
 	t_player	player;
+	bool		fog_enabled;
 	t_textures	texture;
 	t_ray		ray;
 }			t_game;

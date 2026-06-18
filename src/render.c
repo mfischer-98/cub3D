@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/16 16:04:21 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 13:18:36 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,20 @@ void	draw_wall_column(int x, t_game *game, t_ray *ray)
 	y = 0;
 	while (y < ray->draw_start)
 	{
-		//color = game->texture.hex_ceiling;
-		color = apply_fog_row(game->texture.hex_ceiling, y, game->win_height);
+		if (game->fog_enabled)
+			color = apply_fog_row(game->texture.hex_ceiling, y, game->win_height);
+		else
+			color = game->texture.hex_ceiling;
 		put_pixel(x, y++, color, game);
 	}
 	if (ray->hit == 1)
 		y = render_walls(x, y, game, ray);
 	while (y < game->win_height)
 	{
-		//color = game->texture.hex_floor;
-		color = apply_fog_row(game->texture.hex_floor, y, game->win_height);
+		if (game->fog_enabled)
+			color = apply_fog_row(game->texture.hex_floor, y, game->win_height);
+		else
+			color = game->texture.hex_floor;
 		put_pixel(x, y++, color, game);
 	}
 }
