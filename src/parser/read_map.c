@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 09:36:02 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 11:38:39 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 15:40:34 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,12 @@ char	**read_file(char *file)
 	while (line)
 	{
 		map_file[i] = ft_strdup(line);
+		free(line);
 		line = get_next_line(fd);
 		i++;
 	}
 	map_file[i] = NULL;
-	return (close(fd), map_file);
+	return (close(fd), free(line), map_file);
 }
 
 /* Count lines in file so we can allocate memory */
@@ -53,10 +54,11 @@ int	count_lines(char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
-		line = get_next_line(fd);
 		free(line);
+		line = get_next_line(fd);
 		count++;
 	}
+	free(line);
 	close(fd);
 	return (count);
 }

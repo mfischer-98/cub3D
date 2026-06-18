@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 11:07:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/05/29 15:08:38 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 15:35:22 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char	**copy_array(t_map *map)
 	{
 		copy[i] = malloc(sizeof(char) * (map->width + 1));
 		if (!copy[i])
-			return (NULL);
+			return (free_array(copy), NULL);
 		copy_row(map, copy[i], i);
 		i++;
 	}

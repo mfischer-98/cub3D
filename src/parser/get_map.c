@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 11:40:34 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 15:46:07 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,35 +63,30 @@ int	map_height(int start, char **map_file)
 		}
 		i++;
 	}
-	//if i++ && chamar !map_start, tem outro mapa
-	//if map->height < 0
 	return (height);
 }
 
 /* Puts line inside map->design, trims the \n and gets biggest width */
-void	get_map_design(t_map *map, char *line, int fd)
+void	get_map_width(t_map *map)
 {
 	int		i;
 	int		width;
+	int		len;
 	char	*temp;
 
 	width = 0;
 	i = 0;
-	while (i < map->height)
+	while (map->design[i])
 	{
-		line = get_next_line(fd);
-		map->design[i] = ft_strdup(line);
-		temp = convert_tabs(map->design[i]);
-		free(map->design[i]);
-		map->design[i] = temp;
-		//line_trim(map->design[i]);
-		width = line_len(map->design[i]);
-		if (width > map->width)
-			map->width = width;
-		free(line);
+		temp = map->design[i];
+		map->design[i] = convert_tabs(temp);
+		len = ft_strlen(map->design[i]);
+		if (len > width)
+			width = len;
+		free (temp);
 		i++;
 	}
-	map->design[i] = NULL;
+	map->width = width;
 }
 
 /* Opens map file and gets all the information
@@ -100,6 +95,7 @@ int	read_map(char **map_file, t_map *map)
 {
 	int		i;
 	int		j;
+	char	*trimmed;
 
 	map->start = map_start(map_file);
 	if (!map->start)
@@ -112,10 +108,13 @@ int	read_map(char **map_file, t_map *map)
 	j = 0;
 	while (map_file[i] && j < map->height)
 	{
-		map->design[j] = ft_strdup(map_file[i]);
+		trimmed = ft_strtrim(map_file[i], "\n");
+		map->design[j] = ft_strdup(trimmed);
+		free(trimmed);
 		j++;
 		i++;
 	}
 	map->design[j] = NULL;
+	get_map_width(map);
 	return (0);
 }

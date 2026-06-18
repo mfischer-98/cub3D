@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 09:47:00 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 15:38:53 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	main(int argc, char **argv)
 		free_data(&game);
 		return (1);
 	}
-	// get_player_angle(&game);
-	// init_game(&game);
-	// load_textures(&game);
-	// mlx_hook(game.win, 17, 0, &close_window, &game);
-	// mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
-	// mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
-	// mlx_loop_hook(game.mlx, &render_scene, &game);
-	// mlx_loop(game.mlx);
+	get_player_angle(&game);
+	init_game(&game);
+	load_textures(&game);
+	mlx_hook(game.win, 17, 0, &close_window, &game);
+	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
+	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
+	mlx_loop_hook(game.mlx, &render_scene, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }

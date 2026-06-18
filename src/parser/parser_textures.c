@@ -6,11 +6,84 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 11:42:50 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 15:38:16 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
+
+static int	is_empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+
+	if (line[i] == '\n' || line[i] == '\0')
+		return (1);
+	return (0);
+}
+
+/* Checks and stores values for each texture */
+int	read_config(char **map_file, t_map *map)
+{
+	int		i;
+	char	*trimmed;
+	int		count;
+
+	count = 0;
+	i = 0;
+	map->config = malloc (sizeof (char *) * 7);
+	while (count < 6 && map_file[i])
+	{
+		if (is_empty_line(map_file[i]))
+			i++;
+		if (not_identifier(map_file[i]))
+		{
+			printf("Error\nInvalid identifiers\n");
+			return (1);
+		}
+		else
+		{
+			trimmed = ft_strtrim(map_file[i], "\n");
+			map->config[count] = ft_strdup(trimmed);
+			free(trimmed);
+			count++;
+		}
+		i++;
+	}
+	map->config[count] = NULL;
+	return (0);
+}
+
+/* Checks if the texture path is correct */
+int	check_textures(char **map_file, t_game *game, t_map *map)
+{
+	int	i;
+	int	j;
+
+	if (read_config(map_file, map))
+		return (1);
+	i = 0;
+	while (map->config[i])
+	{
+		j = 0;
+		j = skip_spaces(map->config[i], j);
+		if (map->config[i][j] == 'N' || map->config[i][j] == 'S'
+			|| map->config[i][j] == 'W' || map->config[i][j] == 'E')
+		{
+			j += 2;
+			j = skip_spaces(map->config[i], j);
+			if (check_fd(&map->config[i][j], 't'))
+				return (1);
+		}
+		i++;
+	}
+	if (check_duplicates(map))
+		return (1);
+	if (check_colors(map, game))
+		return (1);
+	return (0);
+}
 
 /* Checks for duplicated identifiers, to have less lines I created the array */
 int	check_duplicates(t_map *map)
@@ -60,75 +133,4 @@ int	not_identifier(char *line)
 	if (line[i] == 'C' && line[i + 1] == ' ')
 		return (0);
 	return (1);
-}
-static int	is_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-
-	if (line[i] == '\n' || line[i] == '\0')
-		return (1);
-	return (0);
-}
-
-/* Checks and stores values for each texture */
-int	read_config(char **map_file, t_map *map)
-{
-	int		i;
-	char	*trimmed;
-	int		count;
-
-	count = 0;
-	i = 0;
-	map->config = malloc (sizeof (char *) * 7);
-	while (count < 6 && map_file[i])
-	{
-		if (is_empty_line(map_file[i]))
-			i++;
-		if (not_identifier(map_file[i]))
-		{
-			printf("Error\nInvalid identifiers\n");
-			return (1);
-		}
-		else
-		{
-			trimmed = ft_strtrim(map_file[i], "\n");
-			map->config[count] = ft_strdup(trimmed);
-			count++;
-		}
-		i++;
-	}
-	map->config[count] = NULL;
-	return (0);
-}
-
-/* Checks if the texture path is correct */
-int	check_textures(char **map_file, t_game *game, t_map *map)
-{
-	int	i;
-	int	j;
-
-	if (read_config(map_file, map))
-		return (1);
-	i = 0;
-	while (map->config[i])
-	{
-		j = 0;
-		j = skip_spaces(map->config[i], j);
-		if (map->config[i][j] == 'N' || map->config[i][j] == 'S'
-			|| map->config[i][j] == 'W' || map->config[i][j] == 'E')
-		{
-			j += 2;
-			j = skip_spaces(map->config[i], j);
-			if (check_fd(&map->config[i][j], 't'))
-				return (1);
-		}
-		i++;
-	}
-	if (check_duplicates(map))
-		return (1);
-	if (check_colors(map, game))
-		return (1);
-	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 11:44:17 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/18 15:07:58 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,9 @@ int	parsing(int ac, char **args, t_game *game)
 	if (check_textures(map_file, game, &game->map))
 		return (1);
 	if (read_map(map_file, &game->map))
-	// // if (check_blank_lines(&game->map)) //check map too smalll min 3x3
-	// // 	return (1);
+		return (1);
+	// if (check_blank_lines(&game->map))
+	// 	return (1);
 	if (check_chars(&game->map))
 		return (1);
 	if (check_player_char(&game->map))
