@@ -6,7 +6,7 @@
 /*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 13:21:15 by ntomas-g         ###   ########.fr       */
+/*   Updated: 2026/06/18 11:44:42 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,20 +137,20 @@ int		parsing(int ac, char **args, t_game *game);
 int		check_number(int n);
 int		check_fd(char *file_name, char c);
 int		check_map_name(char *name);
+char	**read_file(char *file);
+int		count_lines(char *file);
 int		not_identifier(char *line);
 int		skip_spaces(char *str, int i);
-int		check_textures(t_map *map);
-int		read_config(char *map_file, t_map *map);
-int		get_line(t_map *map, char *line, int *count);
+int		check_textures(char **map_file, t_game *game, t_map *map);
+int		read_config(char **map_file, t_map *map);
 int		check_duplicates(t_map *map);
 void	id_count(char id, int *counter);
 int		check_colors(t_map *map, t_game *game);
 int		check_rgb_format(char *str, t_game *game, char c);
 int		check_rgb_number(char **str);
-void	read_map(char *map_file, t_map *map);
-void	get_map_design(t_map *map, char *line, int fd);
-int		map_height(int start, char *map_file);
-int		map_start(char *map_file);
+int		read_map(char **map_file, t_map *map);
+int		map_height(int start, char **map_file);
+int		map_start(char **map_file);
 void	line_trim(char *str);
 int		line_len(char *str);
 char	*convert_tabs(char *str);
@@ -158,7 +158,6 @@ void	find_player(t_map *map, t_player *player);
 char	**copy_array(t_map *map);
 int		flood_fill(t_map *map, char **map_copy, int x, int y);
 int		check_walls(t_map *map, t_player *player);
-void	run_file(char *line, int fd);
 
 // INITIALIZATION
 t_game	init_game_data(void);

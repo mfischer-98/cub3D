@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/16 14:07:23 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 11:15:51 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_blank_lines(t_map *map)
 	int	j;
 
 	i = 0;
-	while (i < map->height - 1)
+	while (i < map->height)
 	{
 		j = 0;
 		j = skip_spaces(map->design[i], j);
@@ -92,38 +92,29 @@ int	check_player_char(t_map *map)
 
 int	parsing(int ac, char **args, t_game *game)
 {
+	char	**map_file;
+
 	if (check_number(ac))
 		return (1);
 	if (check_fd(args[1], 'm'))
 		return (1);
 	if (check_map_name(args[1]))
 		return (1);
-	if (read_config(args[1], &game->map))
-		return (1);
-	if (check_textures(&game->map))
-		return (1);
-	if (check_duplicates(&game->map))
-		return (1);
-	if (check_colors(&game->map, game))
-		return (1);
-	read_map(args[1], &game->map);
-	//check map too smalll min 3x3
+	map_file = read_file(args[1]);
+	if (!map_file)
+		return (free_array(map_file), 1);
+	if (check_textures(map_file, game, &game->map))
+		return (free_array(map_file), 1);
+	if (read_map(map_file, &game->map))
+		return (free_array(map_file), 1);
 	if (check_blank_lines(&game->map))
-		return (1);
+		return (free_array(map_file), 1);
 	if (check_chars(&game->map))
-		return (1);
+		return (free_array(map_file), 1);
 	if (check_player_char(&game->map))
-		return (1);
+		return (free_array(map_file), 1);
 	if (check_walls(&game->map, &game->player))
-		return (1);
+		return (free_array(map_file), 1);
+	free_array(map_file);
 	return (0);
-}
-
-void	run_file(char *line, int fd)
-{
-	while (line)
-	{
-		line = get_next_line(fd);
-		free(line);
-	}
 }
