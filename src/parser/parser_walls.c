@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/27 11:07:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 12:18:39 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 15:56:03 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,6 @@ void	find_player(t_map *map, t_player *player)
 		}
 		i++;
 	}
-}
-
-/* Checks if besides player area, there are areas unvisited on map */
-int	more_floor(char **copy, t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < map->height)
-	{
-		j = 0;
-		while(j < map->width)
-		{
-			if (copy[i][j] == '0')
-				return (flood_fill(map, copy, i, j));
-			j++;
-		}
-		i++;
-	}
-	return (0);
 }
 
 /* Turns 0 into Fs and then checks 
@@ -96,11 +75,6 @@ int	check_walls(t_map *map, t_player *player)
 		printf("Error\nMap not enclosed by walls\n");
 		return (free_array(map_copy), 1);
 	}
-	// if (more_floor(map_copy, map))
-	// {
-	// 	printf("Error\nDisconnected map\n");
-	// 	return (free_array(map_copy), 1);
-	// }
 	free_array(map_copy);
 	return (0);
 }

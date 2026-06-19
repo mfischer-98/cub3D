@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 10:47:28 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 15:33:05 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	is_empty_line(char *line)
 	int	i;
 
 	i = 0;
-
 	if (line[i] == '\n' || line[i] == '\0')
 		return (1);
 	return (0);

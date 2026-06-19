@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/18 09:36:02 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 15:40:34 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 15:32:37 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ char	**read_file(char *file)
 /* Count lines in file so we can allocate memory */
 int	count_lines(char *file)
 {
-	int	fd;
-	int	count;
-	char *line;
+	int		fd;
+	int		count;
+	char	*line;
 
 	count = 0;
 	fd = open(file, O_RDONLY);

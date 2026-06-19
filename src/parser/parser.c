@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 11:15:51 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 15:24:43 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int	check_chars(t_map *map)
 		j = 0;
 		while (map->design[i][j])
 		{
-			j = skip_spaces(map->design[i], j);
 			if (map->design[i][j] != '1' && map->design[i][j] != '0'
 				&& map->design[i][j] != 'N' && map->design[i][j] != 'S'
-				&& map->design[i][j] != 'E' && map->design[i][j] != 'W')
+				&& map->design[i][j] != 'E' && map->design[i][j] != 'W'
+				&& map->design[i][j] != ' ')
 			{
 				printf("Error\nInvalid map characters\n");
 				return (1);
@@ -74,7 +74,6 @@ int	check_player_char(t_map *map)
 		j = 0;
 		while (map->design[i][j])
 		{
-			j = skip_spaces(map->design[i], j);
 			if (map->design[i][j] == 'N' || map->design[i][j] == 'S'
 				|| map->design[i][j] == 'E' || map->design[i][j] == 'W')
 			{
