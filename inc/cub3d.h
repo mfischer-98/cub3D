@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 15:50:36 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 17:13:12 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,6 @@ int		check_rgb_number(char **str);
 int		read_map(char **map_file, t_map *map);
 int		map_height(int start, char **map_file);
 int		map_start(char **map_file);
-void	line_trim(char *str);
-int		line_len(char *str);
 char	*convert_tabs(char *str);
 void	find_player(t_map *map, t_player *player);
 char	**copy_array(t_map *map);
@@ -173,7 +171,6 @@ int		apply_fog(int color, double dist, double fog_start, double fog_end);
 int		apply_fog_row(int color, int y, int height);
 int		render_scene(t_game *game);
 void	clear_image(t_game *game);
-void	draw_map(t_game *game);
 
 // TEXTURES
 void	load_textures(t_game *game);

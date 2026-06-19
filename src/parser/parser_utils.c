@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:17:24 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 15:09:31 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 17:12:33 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ void	id_count(char id, int *counter)
 		counter[4]++;
 	else if (id == 'C')
 		counter[5]++;
-}
-
-int	line_len(char *str)
-{
-	int	len;
-
-	len = 0;
-	if (str)
-	{
-		while (str[len])
-			len++;
-	}
-	return (len);
 }
 
 int	skip_spaces(char *str, int i)
