@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:21:31 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:42:56 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 15:33:59 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,10 @@ int	check_colors(t_map *map, t_game *game)
 		{
 			if (map->config[i][j] == 'F'
 				&& check_rgb_format(&map->config[i][j + 2], game, 'f'))
-			{
-				printf("Error\nInvalid RGB value\n");
-				return (1);
-			}
+				return (printf("Error\nInvalid RGB value\n"), 1);
 			else if (map->config[i][j] == 'C'
 				&& check_rgb_format(&map->config[i][j + 2], game, 'c'))
-			{
-				printf("Error\nInvalid RGB value\n");
-				return (1);
-			}
+				return (printf("Error\nInvalid RGB value\n"), 1);
 			j++;
 		}
 		i++;

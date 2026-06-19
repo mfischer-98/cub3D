@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntomas-g <ntomas-g@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 13:18:36 by ntomas-g         ###   ########.fr       */
+/*   Updated: 2026/06/19 15:32:03 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	draw_wall_column(int x, t_game *game, t_ray *ray)
 	while (y < ray->draw_start)
 	{
 		if (game->fog_enabled)
-			color = apply_fog_row(game->texture.hex_ceiling, y, game->win_height);
+			color = apply_fog_row(game->texture.hex_ceiling,
+					y, game->win_height);
 		else
 			color = game->texture.hex_ceiling;
 		put_pixel(x, y++, color, game);

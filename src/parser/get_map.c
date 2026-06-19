@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 11:08:39 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 15:19:32 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,35 @@ void	get_map_width(t_map *map)
 	map->width = width;
 }
 
+void	fill_map(t_map *map)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	*new;
+
+	i = 0;
+	while (i < map->height)
+	{
+		new = malloc (sizeof (char) * (map->width + 1));
+		if (!new)
+			return ;
+		len = ft_strlen(map->design[i]);
+		j = 0;
+		while (j < len)
+		{
+			new[j] = map->design[i][j];
+			j++;
+		}
+		while (j < map->width)
+			new[j++] = ' ';
+		new[j] = '\0';
+		free(map->design[i]);
+		map->design[i] = new;
+		i++;
+	}
+}
+
 /* Opens map file and gets all the information
 	so we have it in our map struct */
 int	read_map(char **map_file, t_map *map)
@@ -116,5 +145,6 @@ int	read_map(char **map_file, t_map *map)
 	}
 	map->design[j] = NULL;
 	get_map_width(map);
+	fill_map(map);
 	return (0);
 }

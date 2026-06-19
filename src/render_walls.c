@@ -70,37 +70,39 @@ int	get_text_x(t_img *text, t_ray *ray)
 	return (text_x);
 }
 
-/* Draws the textured wall stripe for one screen column x.
-	First it selects the correct wall texture, then gets the texture column
+/* 	First it selects the correct wall texture, then gets the texture column
 	that matches the wall hit point, and finally stretches that texture
 	vertically between draw_start and draw_end by sampling texture pixels
 	from top to bottom and writing them to the screen. */
-int	render_walls(int x, int y, t_game *game, t_ray *ray)
+static int	draw_wall_pixels(int x, int y, t_game *game, t_ray *ray)
 {
 	t_img	*text;
-	int		wall_height;
-	int		text_x;
-	int		text_y;
-	double	text_pos;
 	double	step;
+	double	text_pos;
+	int		text_x;
 	int		color;
 
 	text = get_face_texture(ray->wall_face, game);
-	wall_height = ray->line_height;
-	if (wall_height <= 0)
-		return (y);
 	text_x = get_text_x(text, ray);
 	step = 1.0 * text->height / ray->line_height;
 	text_pos = (ray->draw_start - game->win_height / 2
 			+ ray->line_height / 2) * step;
 	while (y <= ray->draw_end)
 	{
-		text_y = (int)text_pos;
-		color = get_texture_color(text, text_x, text_y);
+		color = get_texture_color(text, text_x, (int)text_pos);
 		if (game->fog_enabled)
-			color = apply_fog(color, ray->p_dist, WALL_FOG_START, WALL_FOG_END);
+			color = apply_fog(color, ray->p_dist,
+					WALL_FOG_START, WALL_FOG_END);
 		put_pixel(x, y++, color, game);
 		text_pos += step;
 	}
 	return (y);
+}
+
+/* Draws the textured wall stripe for one screen column x */
+int	render_walls(int x, int y, t_game *game, t_ray *ray)
+{
+	if (ray->line_height <= 0)
+		return (y);
+	return (draw_wall_pixels(x, y, game, ray));
 }
