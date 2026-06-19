@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 09:09:27 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:35:46 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 17:17:38 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,28 @@ void	dda_grid_step(t_game *game, t_ray *ray)
 	dda_ray_loop(game, ray, step_x, step_y);
 }
 
+/* Advances the ray through the map grid using DDA until it hits
+	a wall or goes out of bounds. 
+	- side_x < side_y = vertical line is closer
+	- It checks whether the next step crosses a vertical (side = 0 = X)
+		or horizontal (side = 1 = Y) grid line first. */
 void	dda_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y)
 {
 	ray->hit = 0;
 	ray->side = 0;
 	while (ray->hit == 0)
 	{
-		if (ray->side_x < ray->side_y) // Linha y (VERTICAL) está mais perto
+		if (ray->side_x < ray->side_y)
 		{
-			ray->side_x += ray->delta_x; //avanço a distancia para prox linha vertical
-			ray->map_x += step_x; //avanca grid no mapa
-			ray->side = 0; //marca que estamos no lado X, que é vertical
+			ray->side_x += ray->delta_x;
+			ray->map_x += step_x;
+			ray->side = 0;
 		}
-		else // Linha x (HORIZONTAL) está mais perto
+		else
 		{
-			ray->side_y += ray->delta_y; //avanço a distancia para prox linha horizontal
-			ray->map_y += step_y; //avanca grid no mapa
-			ray->side = 1; //marca que estamos no lado Y, que é horizontal
+			ray->side_y += ray->delta_y;
+			ray->map_y += step_y;
+			ray->side = 1;
 		}
 		if (ray->map_y < 0 || ray->map_y >= game->map.height
 			|| ray->map_x < 0 || ray->map_x >= game->map.width)
@@ -71,6 +76,9 @@ void	dda_ray_loop(t_game *game, t_ray *ray, int step_x, int step_y)
 	}
 }
 
+/* Determines which face of the wall was hit based on the ray
+	direction and whether the collision happened on a vertical
+	or horizontal side. */
 void	get_wall_face(int step_x, int step_y, t_ray *ray)
 {
 	if (ray->side == 0)
@@ -89,6 +97,9 @@ void	get_wall_face(int step_x, int step_y, t_ray *ray)
 	}
 }
 
+/* Sets up the ray for one screen column, runs the DDA collision
+	check, calculates the perpendicular wall distance, computes
+	the wall height, and draws the wall slice. */
 void	ray_line(int i, t_game *game)
 {
 	setup_ray(game, i);
