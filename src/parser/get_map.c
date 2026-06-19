@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:04:43 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 15:46:07 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 11:08:39 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	map_start(char **map_file)
 		{
 			while (map_file[i][j] == ' ' || map_file[i][j] == '\t')
 				j++;
-			if (map_file[i][j] == '1')
+			if (map_file[i][j] == '1' || map_file[i][j] == '0')
 				return (i);
 			j++;
 		}
@@ -54,7 +54,7 @@ int	map_height(int start, char **map_file)
 		{
 			while (map_file[i][j] == ' ' || map_file[i][j] == '\t')
 				j++;
-			if (map_file[i][j] == '1')
+			if (map_file[i][j] == '1' || map_file[i][j] == '0')
 			{
 				height++;
 				break ;

@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 15:38:16 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 10:47:28 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,13 @@ int	read_config(char **map_file, t_map *map)
 
 	count = 0;
 	i = 0;
-	map->config = malloc (sizeof (char *) * 7);
+	map->config = ft_calloc(7, sizeof(char *));
 	while (count < 6 && map_file[i])
 	{
 		if (is_empty_line(map_file[i]))
 			i++;
 		if (not_identifier(map_file[i]))
-		{
-			printf("Error\nInvalid identifiers\n");
-			return (1);
-		}
+			return (printf("Error\nInvalid identifiers\n"), 1);
 		else
 		{
 			trimmed = ft_strtrim(map_file[i], "\n");

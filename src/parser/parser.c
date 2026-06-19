@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:57:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/18 15:07:58 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/19 11:15:51 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	check_blank_lines(t_map *map)
 	int	j;
 
 	i = 0;
-	while (i < map->height - 1)
+	while (i < map->height)
 	{
 		j = 0;
 		j = skip_spaces(map->design[i], j);
@@ -102,19 +102,19 @@ int	parsing(int ac, char **args, t_game *game)
 		return (1);
 	map_file = read_file(args[1]);
 	if (!map_file)
-		return (1);
+		return (free_array(map_file), 1);
 	if (check_textures(map_file, game, &game->map))
-		return (1);
+		return (free_array(map_file), 1);
 	if (read_map(map_file, &game->map))
-		return (1);
-	// if (check_blank_lines(&game->map))
-	// 	return (1);
+		return (free_array(map_file), 1);
+	if (check_blank_lines(&game->map))
+		return (free_array(map_file), 1);
 	if (check_chars(&game->map))
-		return (1);
+		return (free_array(map_file), 1);
 	if (check_player_char(&game->map))
-		return (1);
+		return (free_array(map_file), 1);
 	if (check_walls(&game->map, &game->player))
-		return (1);
+		return (free_array(map_file), 1);
 	free_array(map_file);
 	return (0);
 }
