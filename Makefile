@@ -6,7 +6,7 @@
 #    By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/07 11:08:27 by mefische          #+#    #+#              #
-#    Updated: 2026/06/21 13:04:54 by mefische         ###   ########.fr        #
+#    Updated: 2026/06/21 13:09:16 by mefische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,7 +65,7 @@ $(BONUS): $(BONUS_OBJ) $(LIBFT) $(MLX_ARC)
 	@touch $(BONUS)
 	@echo "✨ Bonus game ready!"
 
-%.o: %.c
+%.o: %.c | $(MLX_ARC)
 		@$(CC) $(CFLAGS) -I$(MLX_PATH) -c $< -o $@
 
 clean:
@@ -73,7 +73,7 @@ clean:
 		@$(MAKE) -C $(LIBFT_DIR) clean --silent
 
 fclean: clean
-		@rm -f $(NAME)
+		@rm -f $(NAME) $(BONUS)
 		@$(MAKE) -C $(LIBFT_DIR) fclean --silent
 		@echo "✅ cleanup done!"
 
