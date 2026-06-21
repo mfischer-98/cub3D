@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 17:13:12 by mefische         ###   ########.fr       */
+/*   Updated: 2026/06/21 12:38:49 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@
 # define D 100
 # define F 102
 # define PI 3.14159265359
-# define WALL_FOG_START 1.0 // distancia onde parede comeca a escurecer
-# define WALL_FOG_END 3.0 // distancia onde parede fica totalmente escura
-# define BORDER_FOG_START 0.25 // distancia onde escuridão comeca
-# define BORDER_FOG_END 0.4 // distancia onde escuridão é total
-# define BORDER_FOG_NEAR 0.2 // Nao mudar estes
-# define BORDER_FOG_FAR 0.5 // Nao mudar estes
+# define WALL_FOG_START 1.0
+# define WALL_FOG_END 3.0
+# define BORDER_FOG_START 0.25
+# define BORDER_FOG_END 0.4
+# define BORDER_FOG_NEAR 0.2
+# define BORDER_FOG_FAR 0.5
 
 typedef struct s_map
 {
