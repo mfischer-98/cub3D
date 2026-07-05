@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/21 12:38:49 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/05 14:06:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define TILE_SIZE 64
 # define SPEED 0.1
 # define ANGLE_SPEED 0.1
+# define MOUSE_SPEED 0.01
 
 # define W 119
 # define A 97
@@ -202,6 +203,13 @@ void	move_horizontal(t_player *player, t_map *map);
 // KEY EVENTS
 int		key_press(int keysym, t_game *game);
 int		key_release(int keysym, t_game *game);
+
+// MOUSE EVENTS
+void	look_left(t_player *player);
+void	look_right(t_player *player);
+void	init_mouse_capture(t_game *game);
+void	release_mouse_capture(t_game *game);
+int		mouse_move(int x, int y, void *param);
 
 // FREE DATA
 int		close_window(t_game *game);
