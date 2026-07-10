@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/07/05 14:24:57 by marvin           ###   ########.fr       */
+/*   Updated: 2026/07/10 11:09:41 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 17, 0, &close_window, &game);
 	mlx_hook(game.win, 2, 1L << 0, &key_press, &game);
 	mlx_hook(game.win, 3, 1L << 1, &key_release, &game);
-	mlx_hook(game.win, 6, 1L << 6, &mouse_move, &game);
-	mlx_mouse_hide(game.mlx, game.win);
-	init_mouse_capture(&game);
-	mlx_mouse_move(game.mlx, game.win, game.win_width / 2, game.win_height / 2);
 	mlx_loop_hook(game.mlx, &render_scene, &game);
 	mlx_loop(game.mlx);
 	return (0);

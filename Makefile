@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: ntomas-g <ntomas-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/07 11:08:27 by mefische          #+#    #+#              #
-#    Updated: 2026/07/05 13:48:18 by marvin           ###   ########.fr        #
+#    Updated: 2026/07/10 11:04:10 by ntomas-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,12 @@ NAME = cub3D
 BONUS	= .bonus_build
 MLX_URL	= git@github.com:42paris/minilibx-linux
 
-SRC = src/main.c src/init.c src/events.c src/free_data.c src/render.c src/movements.c src/mouse.c src/ray.c src/ray_utils.c \
+SRC = src/main.c src/init.c src/events.c src/free_data.c src/render.c src/movements.c src/ray.c src/ray_utils.c \
 		src/load_textures.c src/render_walls.c src/fog.c \
 		src/parser/parser.c src/parser/parser_utils.c src/parser/parser_args.c  src/parser/parser_textures.c src/parser/parser_colors.c \
 		src/parser/get_map.c src/parser/parser_walls.c src/parser/read_map.c 
 
-BONUS_SRC = src_bonus/main.c src_bonus/init.c src_bonus/events.c src_bonus/free_data.c src_bonus/render.c src_bonus/movements.c src_bonus/ray.c src_bonus/ray_utils.c \
+BONUS_SRC = src_bonus/main.c src_bonus/init.c src_bonus/events.c src_bonus/free_data.c src_bonus/render.c src_bonus/mouse.c src_bonus/movements.c src_bonus/ray.c src_bonus/ray_utils.c \
 		src_bonus/load_textures.c src_bonus/render_walls.c src_bonus/fog.c \
 		src_bonus/parser/parser.c src_bonus/parser/parser_utils.c src_bonus/parser/parser_args.c  src_bonus/parser/parser_textures.c src_bonus/parser/parser_colors.c \
 		src_bonus/parser/get_map.c src_bonus/parser/parser_walls.c src_bonus/parser/read_map.c 
