@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/07/05 14:06:02 by marvin           ###   ########.fr       */
+/*   Updated: 2026/07/10 11:30:41 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@
 # include "libft/libft.h"
 # include "mlx/mlx.h"
 # include <X11/keysym.h>
-
+	
 # define TILE_SIZE 64
 # define SPEED 0.1
 # define ANGLE_SPEED 0.1
-# define MOUSE_SPEED 0.01
+# define MOUSE_SPEED 0.03
 
 # define W 119
 # define A 97
@@ -207,8 +207,6 @@ int		key_release(int keysym, t_game *game);
 // MOUSE EVENTS
 void	look_left(t_player *player);
 void	look_right(t_player *player);
-void	init_mouse_capture(t_game *game);
-void	release_mouse_capture(t_game *game);
 int		mouse_move(int x, int y, void *param);
 
 // FREE DATA

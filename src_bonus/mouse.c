@@ -12,10 +12,7 @@
 
 #include "../inc/cub3d.h"
 
-static int g_last_mouse_x = -1;
-static int g_last_mouse_y = -1;
-
-static void update_camera_angle(t_player *player, double delta)
+static void	update_camera_angle(t_player *player, double delta)
 {
 	player->angle += delta;
 	while (player->angle > 2 * PI)
@@ -28,7 +25,7 @@ static void update_camera_angle(t_player *player, double delta)
 	player->plane_y = player->dir_x * 0.66;
 }
 
-static void center_mouse_cursor(t_game *game)
+static void	center_mouse_cursor(t_game *game)
 {
 	int	center_x;
 	int	center_y;
@@ -50,7 +47,9 @@ void	look_right(t_player *player)
 
 int	mouse_move(int x, int y, void *param)
 {
-	t_game	*game;
+	static int	g_last_mouse_x = -1;
+	static int	g_last_mouse_y = -1;
+	t_game		*game;
 
 	if (!param)
 		return (0);
@@ -72,4 +71,3 @@ int	mouse_move(int x, int y, void *param)
 	(void)y;
 	return (0);
 }
-
