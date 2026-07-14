@@ -6,11 +6,11 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/28 15:10:34 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 15:32:03 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:57:40 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc_bonus/cub3d_bonus.h"
 
 /* Main RayCasting loop */
 int	render_scene(t_game *game)
@@ -31,6 +31,7 @@ int	render_scene(t_game *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	minimap(game);
 	return (0);
 }
 

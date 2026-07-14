@@ -6,11 +6,11 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/02 09:09:27 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 17:17:38 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:32:43 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc_bonus/cub3d_bonus.h"
 
 /* Decides which direction the ray goes and calculates the distance
 	until the first horizontal or verticla line */

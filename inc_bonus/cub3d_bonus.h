@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/07/14 14:09:37 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/14 14:10:11 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -208,6 +208,9 @@ int		key_release(int keysym, t_game *game);
 void	look_left(t_player *player);
 void	look_right(t_player *player);
 int		mouse_move(int x, int y, void *param);
+
+// MINIMAP
+void	minimap(t_game *game);
 
 // FREE DATA
 int		close_window(t_game *game);

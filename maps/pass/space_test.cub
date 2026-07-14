@@ -6,7 +6,7 @@
 
 
 
-NO ./inc/textures/Test_N.xpm
+NO ./textures/Test_N.xpm
 
 
 
@@ -15,9 +15,9 @@ NO ./inc/textures/Test_N.xpm
 
 
 
-SO ./inc/textures/Test_S.xpm
-                        WE ./inc/textures/Test_W.xpm
-    	    EA ./inc/textures/Test_E.xpm            
+SO ./textures/Test_S.xpm
+                        WE ./textures/Test_W.xpm
+    	    EA ./textures/Test_E.xpm            
 
      	   F 20,20,0
 C     200,200,200

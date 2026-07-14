@@ -6,11 +6,11 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/05 09:11:07 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 17:22:44 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:32:43 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc_bonus/cub3d_bonus.h"
 
 /* Calculates the perpendicular distance from the player to the wall
 	after the DDA loop. One delta is subtracted because the last DDA

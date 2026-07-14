@@ -1,7 +1,7 @@
-NO ./inc/textures/Test_N.xpm
-SO ./inc/textures/Test_S.xpm
-WE ./inc/textures/Test_W.xpm
-EA ./inc/textures/Test_E.xpm
+NO ./textures/Test_N.xpm
+SO ./textures/Test_S.xpm
+WE ./textures/Test_W.xpm
+EA ./textures/Test_E.xpm
 
 F 82,67,54
 C 0,0,0

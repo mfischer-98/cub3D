@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc_bonus/cub3d_bonus.h"
 
 /* Chooses correct wall texture */
 t_img	*get_face_texture(char face, t_game *game)

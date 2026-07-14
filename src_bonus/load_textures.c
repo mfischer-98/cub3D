@@ -6,11 +6,11 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/09 08:35:08 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/15 16:40:43 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/14 13:32:43 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../inc_bonus/cub3d_bonus.h"
 
 char	*get_wall_path(t_game *game, char c)
 {

@@ -6,7 +6,7 @@
 #    By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/07 11:08:27 by mefische          #+#    #+#              #
-#    Updated: 2026/07/14 11:10:54 by mefische         ###   ########.fr        #
+#    Updated: 2026/07/14 13:36:04 by mefische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ SRC = src/main.c src/init.c src/events.c src/free_data.c src/render.c src/moveme
 		src/parser/get_map.c src/parser/parser_walls.c src/parser/read_map.c 
 
 BONUS_SRC = src_bonus/main.c src_bonus/init.c src_bonus/events.c src_bonus/free_data.c src_bonus/render.c src_bonus/mouse.c src_bonus/movements.c src_bonus/ray.c src_bonus/ray_utils.c \
-		src_bonus/load_textures.c src_bonus/render_walls.c src_bonus/fog.c \
+		src_bonus/load_textures.c src_bonus/render_walls.c src_bonus/fog.c src_bonus/minimap_bonus.c \
 		src_bonus/parser/parser.c src_bonus/parser/parser_utils.c src_bonus/parser/parser_args.c  src_bonus/parser/parser_textures.c src_bonus/parser/parser_colors.c \
 		src_bonus/parser/get_map.c src_bonus/parser/parser_walls.c src_bonus/parser/read_map.c 
 
-MLX_PATH	= inc/mlx
+MLX_PATH	= mlx
 MLX_ARC		= $(MLX_PATH)/libmlx_Linux.a
 		
 OBJ = $(SRC:.c=.o)
@@ -35,7 +35,7 @@ BONUS_OBJ = $(BONUS_SRC:.c=.o)
 CC = cc
 CFLAGS = -Werror -Wextra -Wall -g
 
-LIBFT_DIR = inc/libft
+LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)

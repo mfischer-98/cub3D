@@ -74,15 +74,20 @@ Run the program with a valid `.cub` map:
 ## Project structure
 ```text
 ├── inc/
-│   ├── libft/
-│   ├── textures/
 │   └── cub3d.h
+├── inc_bonus/
+│   └── cub3d_bonus.h
 ├── maps/
 │   ├── fail/
 │   └── pass/
 ├── src/
 │   ├── parser/
 │   └── *.c
+├── src_bonus/
+│   ├── parser_bonus/
+│   └── *_bonus.c
+├── libft/
+├── textures/
 ├── Makefile
 └── README.md
 ```

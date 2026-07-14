@@ -1,7 +1,7 @@
-NO ./inc/textures/Stripes_DarkWall_03_64.xpm
-SO ./inc/textures/Stripes_LightWall_03_64.xpm
-WE ./inc/textures/Stripes_DarkWall_04_64.xpm
-EA ./inc/textures/Stripes_LightWall_04_64.xpm
+NO ./textures/Stripes_DarkWall_03_64.xpm
+SO ./textures/Stripes_LightWall_03_64.xpm
+WE ./textures/Stripes_DarkWall_04_64.xpm
+EA ./textures/Stripes_LightWall_04_64.xpm
 
 F 82,67,54
 C 0,0,0
