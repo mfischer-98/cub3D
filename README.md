@@ -79,8 +79,7 @@ Run the program with a valid `.cub` map:
 │   └── cub3d.h
 ├── maps/
 │   ├── fail/
-│   ├── pass/
-│   └── *.cub
+│   └── pass/
 ├── src/
 │   ├── parser/
 │   └── *.c
