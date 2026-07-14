@@ -48,7 +48,6 @@ void	look_right(t_player *player)
 int	mouse_move(int x, int y, void *param)
 {
 	static int	g_last_mouse_x = -1;
-	static int	g_last_mouse_y = -1;
 	t_game		*game;
 
 	if (!param)
@@ -57,7 +56,6 @@ int	mouse_move(int x, int y, void *param)
 	if (g_last_mouse_x < 0)
 	{
 		g_last_mouse_x = x;
-		g_last_mouse_y = y;
 		center_mouse_cursor(game);
 		return (0);
 	}
@@ -66,7 +64,6 @@ int	mouse_move(int x, int y, void *param)
 	else if (x < g_last_mouse_x)
 		look_left(&game->player);
 	g_last_mouse_x = x;
-	g_last_mouse_y = y;
 	center_mouse_cursor(game);
 	(void)y;
 	return (0);
