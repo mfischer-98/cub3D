@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:10:53 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 15:33:05 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/14 11:11:26 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ int	read_config(char **map_file, t_map *map)
 	map->config = ft_calloc(7, sizeof(char *));
 	while (count < 6 && map_file[i])
 	{
-		if (is_empty_line(map_file[i]))
+		while (is_empty_line(map_file[i]))
 			i++;
 		if (not_identifier(map_file[i]))
 			return (printf("Error\nInvalid identifiers\n"), 1);
 		else
 		{
-			trimmed = ft_strtrim(map_file[i], "\n");
+			trimmed = ft_strtrim(map_file[i], " \n\t");
 			map->config[count] = ft_strdup(trimmed);
 			free(trimmed);
 			count++;
@@ -54,29 +54,28 @@ int	read_config(char **map_file, t_map *map)
 /* Checks if the texture path is correct */
 int	check_textures(char **map_file, t_game *game, t_map *map)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*path;
 
 	if (read_config(map_file, map))
 		return (1);
 	i = 0;
 	while (map->config[i])
 	{
-		j = 0;
-		j = skip_spaces(map->config[i], j);
+		j = skip_spaces(map->config[i], 0);
 		if (map->config[i][j] == 'N' || map->config[i][j] == 'S'
 			|| map->config[i][j] == 'W' || map->config[i][j] == 'E')
 		{
-			j += 2;
-			j = skip_spaces(map->config[i], j);
-			if (check_fd(&map->config[i][j], 't'))
-				return (1);
+			j = skip_spaces(map->config[i], j + 2);
+			path = ft_strtrim(&map->config[i][j], " \t\n");
+			if (!path || check_fd(path, 't'))
+				return (free(path), 1);
+			free(path);
 		}
 		i++;
 	}
-	if (check_duplicates(map))
-		return (1);
-	if (check_colors(map, game))
+	if (check_duplicates(map) || check_colors(map, game))
 		return (1);
 	return (0);
 }

@@ -3,17 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ntomas-g <ntomas-g@student.42.fr>          +#+  +:+       +#+         #
+#    By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/07 11:08:27 by mefische          #+#    #+#              #
-#    Updated: 2026/07/10 11:04:10 by ntomas-g         ###   ########.fr        #
+#    Updated: 2026/07/14 11:10:54 by mefische         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3D
 
-BONUS	= .bonus_build
-MLX_URL	= git@github.com:42paris/minilibx-linux
+BUILD_DIR	= build
+BONUS		= $(BUILD_DIR)/bonus_build
+MLX_URL		= git@github.com:42paris/minilibx-linux
 
 SRC = src/main.c src/init.c src/events.c src/free_data.c src/render.c src/movements.c src/ray.c src/ray_utils.c \
 		src/load_textures.c src/render_walls.c src/fog.c \
@@ -38,8 +39,10 @@ LIBFT_DIR = inc/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 all: $(NAME)
+	@echo "✅ Mandatory is up to date!"
 
 bonus: $(BONUS)
+	@echo "✅ Bonus is up to date!"
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR) --silent
@@ -59,7 +62,10 @@ $(NAME): $(OBJ) $(LIBFT) $(MLX_ARC)
 		@rm -f $(BONUS)
 		@echo "✨ Game ready!"
 
-$(BONUS): $(BONUS_OBJ) $(LIBFT) $(MLX_ARC)
+$(BUILD_DIR):
+	@mkdir -p $(BUILD_DIR)
+
+$(BONUS): $(BONUS_OBJ) $(LIBFT) $(MLX_ARC) | $(BUILD_DIR)
 	@echo "✨ Loading cub3D bonus..."
 	@$(CC) $(CFLAGS) $(BONUS_OBJ) $(LIBFT) $(MLX_ARC) -L/usr/lib/X11 -lXext -lX11 -lm -o $(NAME)
 	@touch $(BONUS)
@@ -70,6 +76,7 @@ $(BONUS): $(BONUS_OBJ) $(LIBFT) $(MLX_ARC)
 
 clean:
 		@rm -f $(OBJ) $(BONUS_OBJ)
+		@rm -rf $(BUILD_DIR)
 		@$(MAKE) -C $(LIBFT_DIR) clean --silent
 
 fclean: clean

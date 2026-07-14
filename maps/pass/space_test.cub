@@ -1,0 +1,60 @@
+
+
+
+
+
+
+
+
+NO ./inc/textures/Test_N.xpm
+
+
+
+
+
+
+
+
+SO ./inc/textures/Test_S.xpm
+                        WE ./inc/textures/Test_W.xpm
+    	    EA ./inc/textures/Test_E.xpm            
+
+     	   F 20,20,0
+C     200,200,200
+
+11111
+10001
+10S01                
+10001
+10001
+10001
+11001               
+10001
+10001
+10001
+10001		
+10001
+11111           
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
