@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: ntomas-g <ntomas-g@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/10/07 11:08:27 by mefische          #+#    #+#              #
-#    Updated: 2026/07/15 01:54:16 by marvin           ###   ########.fr        #
+#    Updated: 2026/07/15 10:40:56 by ntomas-g         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,10 @@ SRC = src/main.c src/init.c src/events.c src/free_data.c src/render.c src/moveme
 		src/parser/parser.c src/parser/parser_utils.c src/parser/parser_args.c  src/parser/parser_textures.c src/parser/parser_colors.c \
 		src/parser/get_map.c src/parser/parser_walls.c src/parser/read_map.c 
 
-BONUS_SRC = src_bonus/main_bonus.c src_bonus/init.c src_bonus/events.c src_bonus/free_data.c src_bonus/render.c src_bonus/mouse_bonus.c src_bonus/movements.c src_bonus/ray.c src_bonus/ray_utils.c \
-		src_bonus/load_textures.c src_bonus/render_walls.c src_bonus/fog.c src_bonus/minimap_bonus.c \
-		src_bonus/parser_bonus/parser.c src_bonus/parser_bonus/parser_utils.c src_bonus/parser_bonus/parser_args.c  src_bonus/parser_bonus/parser_textures.c src_bonus/parser_bonus/parser_colors.c \
-		src_bonus/parser_bonus/get_map.c src_bonus/parser_bonus/parser_walls.c src_bonus/parser_bonus/read_map.c 
+BONUS_SRC = src_bonus/main_bonus.c src_bonus/init_bonus.c src_bonus/events_bonus.c src_bonus/free_data_bonus.c src_bonus/render_bonus.c src_bonus/mouse_bonus.c src_bonus/movements_bonus.c src_bonus/ray_bonus.c src_bonus/ray_utils_bonus.c \
+	src_bonus/load_textures_bonus.c src_bonus/render_walls_bonus.c src_bonus/fog_bonus.c src_bonus/minimap_bonus.c \
+	src_bonus/parser_bonus/parser_bonus.c src_bonus/parser_bonus/parser_utils_bonus.c src_bonus/parser_bonus/parser_args_bonus.c src_bonus/parser_bonus/parser_textures_bonus.c src_bonus/parser_bonus/parser_colors_bonus.c \
+	src_bonus/parser_bonus/get_map_bonus.c src_bonus/parser_bonus/parser_walls_bonus.c src_bonus/parser_bonus/read_map_bonus.c 
 
 MLX_PATH	= mlx
 MLX_ARC		= $(MLX_PATH)/libmlx_Linux.a

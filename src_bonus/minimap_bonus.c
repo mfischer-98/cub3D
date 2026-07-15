@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 12:04:39 by mefische          #+#    #+#             */
-/*   Updated: 2026/07/14 15:33:35 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/15 10:23:44 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ static void	draw_map(t_game *game, int block, int offset_x, int offset_y)
 		while (game->map.design[y][x])
 		{
 			if (game->map.design[y][x] == '1')
-				draw_square(offset_x + x * block, offset_y + y * block, block, 0xFFFFFF, game);
+				draw_square(offset_x + x * block,
+					offset_y + y * block, block, 0xFFFFFF, game);
 			x++;
 		}
 		y++;

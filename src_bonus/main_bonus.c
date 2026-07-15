@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ntomas-g <ntomas-g@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 14:43:20 by mefische          #+#    #+#             */
-/*   Updated: 2026/07/15 01:57:15 by marvin           ###   ########.fr       */
+/*   Updated: 2026/07/15 10:30:33 by ntomas-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	init_game(t_game *game)
 {
 	game->win_width = 1920;
-	game->win_height = 1080;
+	game->win_height = 1030;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->win_width,
 			game->win_height, "cub3D");
