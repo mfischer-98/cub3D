@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/07/14 14:09:37 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/15 01:53:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 
 # define SPEED 0.1
 # define ANGLE_SPEED 0.1
-# define MOUSE_SPEED 0.03
 
 # define W 119
 # define A 97
@@ -203,11 +202,6 @@ int		not_wall(t_map *map, double x, double y);
 // KEY EVENTS
 int		key_press(int keysym, t_game *game);
 int		key_release(int keysym, t_game *game);
-
-// MOUSE EVENTS
-void	look_left(t_player *player);
-void	look_right(t_player *player);
-int		mouse_move(int x, int y, void *param);
 
 // FREE DATA
 int		close_window(t_game *game);
