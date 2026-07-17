@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntomas-g <ntomas-g@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/29 15:10:59 by mefische          #+#    #+#             */
-/*   Updated: 2026/07/15 10:25:39 by ntomas-g         ###   ########.fr       */
+/*   Updated: 2026/07/17 19:29:58 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <limits.h>
 # include <math.h>
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
@@ -155,6 +156,7 @@ void	find_player(t_map *map, t_player *player);
 char	**copy_array(t_map *map);
 int		flood_fill(t_map *map, char **map_copy, int x, int y);
 int		check_walls(t_map *map, t_player *player);
+int		ft_atol_rgb(char *nptr);
 
 // INITIALIZATION
 t_game	init_game_data(void);

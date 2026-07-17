@@ -6,7 +6,7 @@
 /*   By: mefische <mefische@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 17:21:31 by mefische          #+#    #+#             */
-/*   Updated: 2026/06/19 15:33:59 by mefische         ###   ########.fr       */
+/*   Updated: 2026/07/17 19:29:06 by mefische         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_rgb_number(char **str)
 		while (str[i][j])
 		{
 			j = skip_spaces(str[i], j);
-			if (!ft_isdigit(str[i][j]))
+			if (str[i][j] && !ft_isdigit(str[i][j]))
 				return (1);
 			j++;
 		}
@@ -43,15 +43,15 @@ void	add_values(char **rgb, char c, t_game *game)
 	trimmed = ft_strtrim(rgb[0], " \t");
 	if (c == 'f')
 	{
-		game->texture.floor[0] = ft_atoi((trimmed));
-		game->texture.floor[1] = ft_atoi((rgb[1]));
-		game->texture.floor[2] = ft_atoi((rgb[2]));
+		game->texture.floor[0] = ft_atol_rgb((trimmed));
+		game->texture.floor[1] = ft_atol_rgb((rgb[1]));
+		game->texture.floor[2] = ft_atol_rgb((rgb[2]));
 	}
 	else
 	{
-		game->texture.ceiling[0] = ft_atoi((trimmed));
-		game->texture.ceiling[1] = ft_atoi((rgb[1]));
-		game->texture.ceiling[2] = ft_atoi((rgb[2]));
+		game->texture.ceiling[0] = ft_atol_rgb((trimmed));
+		game->texture.ceiling[1] = ft_atol_rgb((rgb[1]));
+		game->texture.ceiling[2] = ft_atol_rgb((rgb[2]));
 	}
 	free(trimmed);
 }
@@ -64,12 +64,12 @@ int	check_rgb_format(char *str, t_game *game, char c)
 	rgb = ft_split(str, ',');
 	if (!rgb)
 		return (1);
+	if (check_rgb_number(rgb))
+		return (free_array(rgb), 1);
 	if (c == 'f')
 		add_values(rgb, 'f', game);
 	else
 		add_values(rgb, 'c', game);
-	if (check_rgb_number(rgb))
-		return (free_array(rgb), 1);
 	if ((game->texture.floor[0] > 255) || (game->texture.ceiling[0] > 255))
 		return (free_array(rgb), 1);
 	if ((game->texture.floor[1] > 255) || (game->texture.ceiling[1] > 255))
@@ -103,4 +103,31 @@ int	check_colors(t_map *map, t_game *game)
 		i++;
 	}
 	return (0);
+}
+
+int	ft_atol_rgb(char *nptr)
+{
+	long	res;
+	int		neg;
+
+	res = 0;
+	neg = 1;
+	if (!nptr)
+		return (0);
+	while ((*nptr == 32) || (*nptr >= 9 && *nptr <= 13))
+		nptr++;
+	if (*nptr == '-' || *nptr == '+')
+	{
+		if (*nptr == '-')
+			neg = -neg;
+		nptr++;
+	}
+	while (*nptr >= '0' && *nptr <= '9')
+	{
+		if (res > (INT_MAX - (*nptr - '0')) / 10)
+			return (256);
+		res = res * 10 + (*nptr - '0');
+		nptr++;
+	}
+	return (res * neg);
 }
